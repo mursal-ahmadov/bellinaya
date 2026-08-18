@@ -1,0 +1,193 @@
+/* ==========================================================================
+   Bellinaya — design tokens
+   Brand colours are SAMPLED from Logo.png, not guessed:
+     rose-gold ramp  hue 10deg, L 45–75%,  core #C08478, shadow #9C5448
+     ink             #242424 with a plum-tinted sibling #302430
+   Categorical palette validated with the dataviz validator (light + dark):
+     all checks pass; dark run sits in the 6–8 CVD band, so category colour is
+     ALWAYS paired with a text label (secondary encoding) — never colour alone.
+   ========================================================================== */
+
+:root {
+  color-scheme: light;
+
+  /* ---- brand ramp (straight from the logo) ------------------------------ */
+  --rose-50:#FCF5F3;  --rose-100:#F7E9E4;  --rose-200:#EFD5CC;
+  --rose-300:#E4A89C;  --rose-400:#D89C90;  --rose-500:#C08478;
+  --rose-600:#A86C60;  --rose-700:#9C5448;  --rose-800:#7A4136;
+
+  /* ---- surfaces & ink --------------------------------------------------- */
+  --bg:#F5F2F1;
+  --surface:#FFFFFF;
+  --surface-2:#FBF7F6;
+  --surface-3:#F1EBE9;
+  --surface-sunken:#EFE9E7;
+  --line:#E9E1DD;
+  --line-2:#D9CCC6;
+  --ink:#242229;
+  --ink-2:#5B5460;
+  --ink-3:#877D86;
+  --ink-4:#A79DA4;
+  --on-accent:#FFFFFF;
+
+  /* ---- accent (the only place boldness is spent) ------------------------- */
+  --accent:#A25948;
+  --accent-hover:#8E4A3C;
+  --accent-active:#7A3E32;
+  --accent-text:#8E4A3C;
+  --accent-soft:#F7EAE5;
+  --accent-soft-2:#EFDAD3;
+  --accent-line:#E5CCC3;
+  --accent-ring:rgba(162,89,72,.30);
+  --grad-brand:linear-gradient(135deg,#E4A89C 0%,#C08478 46%,#9C5448 100%);
+  --grad-brand-soft:linear-gradient(135deg,#FCF5F3 0%,#F7E9E4 55%,#EFD5CC 100%);
+
+  /* ---- semantic (kept away from the warm accent; always icon + word) ----- */
+  --ok:#2E7D5B;      --ok-soft:#E3F2EA;    --ok-line:#BEE0CD;
+  --warn:#9A6A12;    --warn-soft:#FAEFDB;  --warn-line:#EAD3A4;
+  --danger:#A81F4B;  --danger-soft:#FBE5EC; --danger-line:#EFC1CF;
+  --info:#2C6E9B;    --info-soft:#E3EFF8;  --info-line:#BBD7E9;
+
+  /* ---- service categories (validated set, fixed order, never cycled) ----- */
+  --cat-1:#3A6FD0;  /* Saç          */
+  --cat-2:#BC3A45;  /* Boyama       */
+  --cat-3:#0F8F7E;  /* Dırnaq       */
+  --cat-4:#B0741A;  /* Kirpik & qaş */
+  --cat-5:#C2417E;  /* Kosmetologiya*/
+  --cat-6:#4F8C2B;  /* Makiyaj      */
+  --cat-7:#6D4BA6;  /* Epilyasiya   */
+  --cat-tint:14%;   /* how much hue is mixed into the surface for chips      */
+
+  /* ---- type ------------------------------------------------------------- */
+  --font-display:'Fraunces', 'Iowan Old Style', Georgia, 'Times New Roman', serif;
+  --font-ui:'Commissioner', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-mono:ui-monospace, 'Cascadia Mono', 'SF Mono', Menlo, monospace;
+
+  --t-2xs:.6875rem; --t-xs:.75rem;   --t-sm:.8125rem;  --t-base:.875rem;
+  --t-md:.9375rem;  --t-lg:1.0625rem; --t-xl:1.25rem;  --t-2xl:1.5rem;
+  --t-3xl:1.875rem; --t-4xl:2.375rem; --t-5xl:3rem;    --t-6xl:3.75rem;
+
+  --lh-tight:1.12; --lh-snug:1.28; --lh-normal:1.5; --lh-loose:1.65;
+  --track-tight:-.018em; --track-normal:0; --track-wide:.02em; --track-caps:.09em;
+
+  /* ---- space, radius, elevation ----------------------------------------- */
+  --s0:0; --s1:.25rem; --s2:.5rem; --s3:.75rem; --s4:1rem; --s5:1.25rem;
+  --s6:1.5rem; --s7:1.75rem; --s8:2rem; --s10:2.5rem; --s12:3rem; --s16:4rem;
+
+  --r-xs:.375rem; --r-sm:.5rem; --r-md:.75rem; --r-lg:1rem;
+  --r-xl:1.375rem; --r-2xl:1.75rem; --r-full:999px;
+
+  --sh-1:0 1px 2px rgba(48,36,48,.06), 0 1px 1px rgba(48,36,48,.04);
+  --sh-2:0 2px 6px rgba(48,36,48,.07), 0 1px 2px rgba(48,36,48,.05);
+  --sh-3:0 8px 22px rgba(48,36,48,.10), 0 2px 6px rgba(48,36,48,.06);
+  --sh-4:0 18px 44px rgba(48,36,48,.15), 0 6px 14px rgba(48,36,48,.08);
+  --sh-pop:0 26px 70px rgba(36,28,36,.22), 0 8px 20px rgba(36,28,36,.12);
+  --sh-inset:inset 0 1px 0 rgba(255,255,255,.65);
+
+  /* ---- motion ----------------------------------------------------------- */
+  --e-out:cubic-bezier(.22,.9,.3,1);
+  --e-in-out:cubic-bezier(.6,0,.3,1);
+  --e-spring:cubic-bezier(.34,1.32,.5,1);
+  --d-1:120ms; --d-2:190ms; --d-3:280ms; --d-4:420ms; --d-5:640ms;
+
+  /* ---- layout ----------------------------------------------------------- */
+  --rail-w:15rem;
+  --rail-w-collapsed:4.25rem;
+  --topbar-h:3.75rem;
+  --drawer-w:26.5rem;
+  --page-max:88rem;
+  --calendar-slot-h:2.75rem;   /* one 15-minute row */
+  --calendar-col-min:11.5rem;
+}
+
+/* dark: OS preference, but an explicit light stamp must beat it ------------ */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    color-scheme: dark;
+
+    --bg:#141218;
+    --surface:#1F1B22;
+    --surface-2:#26212A;
+    --surface-3:#2E2833;
+    --surface-sunken:#191519;
+    --line:#332C37;
+    --line-2:#463D4B;
+    --ink:#F3EEF1;
+    --ink-2:#BCB2BA;
+    --ink-3:#8E848D;
+    --ink-4:#6F656E;
+    --on-accent:#FFFFFF;
+
+    --accent:#B9685A;
+    --accent-hover:#CD7A6A;
+    --accent-active:#D98D7C;
+    --accent-text:#E5A899;
+    --accent-soft:#33222A;
+    --accent-soft-2:#412B31;
+    --accent-line:#4E353A;
+    --accent-ring:rgba(229,168,153,.34);
+    --grad-brand:linear-gradient(135deg,#E4A89C 0%,#C08478 46%,#A05B4C 100%);
+    --grad-brand-soft:linear-gradient(135deg,#2C2028 0%,#3A272E 55%,#472E33 100%);
+
+    --ok:#5FBE92;      --ok-soft:#172E25;    --ok-line:#25493A;
+    --warn:#DDA53F;    --warn-soft:#2F2514;  --warn-line:#4C3C1D;
+    --danger:#F0708F;  --danger-soft:#33161F; --danger-line:#54232F;
+    --info:#6BAEDC;    --info-soft:#152735;  --info-line:#234057;
+
+    --cat-1:#5F91E4; --cat-2:#D9646F; --cat-3:#1D9A87; --cat-4:#B87E1C;
+    --cat-5:#CE5389; --cat-6:#5F9C32; --cat-7:#9A82D4;
+    --cat-tint:20%;
+
+    --sh-1:0 1px 2px rgba(0,0,0,.44);
+    --sh-2:0 2px 8px rgba(0,0,0,.46);
+    --sh-3:0 10px 26px rgba(0,0,0,.52);
+    --sh-4:0 20px 48px rgba(0,0,0,.58);
+    --sh-pop:0 28px 76px rgba(0,0,0,.66);
+    --sh-inset:inset 0 1px 0 rgba(255,255,255,.05);
+  }
+}
+
+/* dark: explicit toggle wins in both directions --------------------------- */
+:root[data-theme="dark"] {
+  color-scheme: dark;
+
+  --bg:#141218;
+  --surface:#1F1B22;
+  --surface-2:#26212A;
+  --surface-3:#2E2833;
+  --surface-sunken:#191519;
+  --line:#332C37;
+  --line-2:#463D4B;
+  --ink:#F3EEF1;
+  --ink-2:#BCB2BA;
+  --ink-3:#8E848D;
+  --ink-4:#6F656E;
+  --on-accent:#FFFFFF;
+
+  --accent:#B9685A;
+  --accent-hover:#CD7A6A;
+  --accent-active:#D98D7C;
+  --accent-text:#E5A899;
+  --accent-soft:#33222A;
+  --accent-soft-2:#412B31;
+  --accent-line:#4E353A;
+  --accent-ring:rgba(229,168,153,.34);
+  --grad-brand:linear-gradient(135deg,#E4A89C 0%,#C08478 46%,#A05B4C 100%);
+  --grad-brand-soft:linear-gradient(135deg,#2C2028 0%,#3A272E 55%,#472E33 100%);
+
+  --ok:#5FBE92;      --ok-soft:#172E25;    --ok-line:#25493A;
+  --warn:#DDA53F;    --warn-soft:#2F2514;  --warn-line:#4C3C1D;
+  --danger:#F0708F;  --danger-soft:#33161F; --danger-line:#54232F;
+  --info:#6BAEDC;    --info-soft:#152735;  --info-line:#234057;
+
+  --cat-1:#5F91E4; --cat-2:#D9646F; --cat-3:#1D9A87; --cat-4:#B87E1C;
+  --cat-5:#CE5389; --cat-6:#5F9C32; --cat-7:#9A82D4;
+  --cat-tint:20%;
+
+  --sh-1:0 1px 2px rgba(0,0,0,.44);
+  --sh-2:0 2px 8px rgba(0,0,0,.46);
+  --sh-3:0 10px 26px rgba(0,0,0,.52);
+  --sh-4:0 20px 48px rgba(0,0,0,.58);
+  --sh-pop:0 28px 76px rgba(0,0,0,.66);
+  --sh-inset:inset 0 1px 0 rgba(255,255,255,.05);
+}

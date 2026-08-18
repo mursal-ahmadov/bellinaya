@@ -1,0 +1,13 @@
+# Internal research and strategy — never publish to the open repository.
+# Contains competitor weaknesses, our pricing floor and sales arguments.
+/sened/
+
+# Original 1.2 MB logo master; the optimised versions in assets/img are tracked.
+/Logo.png
+
+# Build output (the multi-file site is what GitHub Pages serves)
+/dist/
+
+node_modules/
+.DS_Store
+Thumbs.db
