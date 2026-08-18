@@ -294,6 +294,8 @@ h4,h5{font-family:var(--font-ui);font-weight:600;font-size:var(--t-md);line-heig
   background:var(--surface-3);border:1px solid var(--line);color:var(--ink-3)}
 
 .hidden{display:none !important}
+/* label that folds away once the top bar gets tight */
+@media (max-width:900px){.hide-sm{display:none}}
 
 /* ==========================================================================
    App shell
