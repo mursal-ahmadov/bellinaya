@@ -30,6 +30,12 @@
   --ink-4:#A79DA4;
   --on-accent:#FFFFFF;
 
+  /* the demo mode bar stays dark in BOTH themes — it is chrome, not content */
+  --bar-bg:#221F26;
+  --bar-ink:#FFFFFF;
+  --bar-dim:rgba(255,255,255,.72);
+  --bar-hover:rgba(255,255,255,.12);
+
   /* ---- accent (the only place boldness is spent) ------------------------- */
   --accent:#A25948;
   --accent-hover:#8E4A3C;
@@ -56,7 +62,7 @@
   --cat-5:#C2417E;  /* Kosmetologiya*/
   --cat-6:#4F8C2B;  /* Makiyaj      */
   --cat-7:#6D4BA6;  /* Epilyasiya   */
-  --cat-tint:14%;   /* how much hue is mixed into the surface for chips      */
+  --cat-tint:22%;   /* how much hue is mixed into the surface for chips      */
 
   /* ---- type ------------------------------------------------------------- */
   --font-display:'Fraunces', 'Iowan Old Style', Georgia, 'Times New Roman', serif;
@@ -97,7 +103,7 @@
   --drawer-w:26.5rem;
   --page-max:88rem;
   --calendar-slot-h:2.75rem;   /* one 15-minute row */
-  --calendar-col-min:11.5rem;
+  --calendar-col-min:10.25rem;
 }
 
 /* dark: OS preference, but an explicit light stamp must beat it ------------ */
@@ -117,6 +123,10 @@
     --ink-3:#8E848D;
     --ink-4:#6F656E;
     --on-accent:#FFFFFF;
+    --bar-bg:#0D0B0F;
+    --bar-ink:#F3EEF1;
+    --bar-dim:rgba(243,238,241,.66);
+    --bar-hover:rgba(255,255,255,.10);
 
     --accent:#B9685A;
     --accent-hover:#CD7A6A;
@@ -136,7 +146,7 @@
 
     --cat-1:#5F91E4; --cat-2:#D9646F; --cat-3:#1D9A87; --cat-4:#B87E1C;
     --cat-5:#CE5389; --cat-6:#5F9C32; --cat-7:#9A82D4;
-    --cat-tint:20%;
+    --cat-tint:30%;
 
     --sh-1:0 1px 2px rgba(0,0,0,.44);
     --sh-2:0 2px 8px rgba(0,0,0,.46);
@@ -163,6 +173,10 @@
   --ink-3:#8E848D;
   --ink-4:#6F656E;
   --on-accent:#FFFFFF;
+  --bar-bg:#0D0B0F;
+  --bar-ink:#F3EEF1;
+  --bar-dim:rgba(243,238,241,.66);
+  --bar-hover:rgba(255,255,255,.10);
 
   --accent:#B9685A;
   --accent-hover:#CD7A6A;
@@ -182,7 +196,7 @@
 
   --cat-1:#5F91E4; --cat-2:#D9646F; --cat-3:#1D9A87; --cat-4:#B87E1C;
   --cat-5:#CE5389; --cat-6:#5F9C32; --cat-7:#9A82D4;
-  --cat-tint:20%;
+  --cat-tint:30%;
 
   --sh-1:0 1px 2px rgba(0,0,0,.44);
   --sh-2:0 2px 8px rgba(0,0,0,.46);

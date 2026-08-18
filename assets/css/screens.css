@@ -95,8 +95,7 @@
 
 .cal{flex:1;min-height:0;display:flex;flex-direction:column;position:relative;overflow:hidden}
 .cal__scroll{flex:1;min-height:0;overflow:auto;position:relative}
-.cal__inner{display:grid;grid-template-columns:var(--gutter,3.75rem) repeat(var(--cols,1),minmax(var(--calendar-col-min),1fr));
-  min-width:max-content;position:relative}
+.cal__inner{display:grid;min-width:max-content;position:relative}
 .cal__corner{position:sticky;top:0;left:0;z-index:6;background:var(--surface);border-bottom:1px solid var(--line);
   border-right:1px solid var(--line);height:3.5rem}
 .cal__head{position:sticky;top:0;z-index:5;background:var(--surface);border-bottom:1px solid var(--line);
@@ -127,12 +126,12 @@
 
 .appt{
   position:absolute;left:3px;right:3px;z-index:2;overflow:hidden;
-  border-radius:var(--r-sm);padding:.3125rem .5rem .3125rem .625rem;
+  border-radius:var(--r-sm);padding:.3125rem .5rem .3125rem .6875rem;
   background:var(--appt-bg);border:1px solid var(--appt-line);
   box-shadow:var(--sh-1);cursor:pointer;user-select:none;
   transition:box-shadow var(--d-1) var(--e-out),transform var(--d-1) var(--e-out),filter var(--d-1) var(--e-out);
 }
-.appt::before{content:"";position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--appt-rail)}
+.appt::before{content:"";position:absolute;left:0;top:0;bottom:0;width:4px;background:var(--appt-rail);border-radius:var(--r-sm) 0 0 var(--r-sm)}
 .appt:hover{box-shadow:var(--sh-3);z-index:3;filter:saturate(1.05)}
 .appt:active{cursor:grabbing}
 .appt__time{font-size:var(--t-2xs);font-weight:650;color:var(--appt-ink);opacity:.85;font-variant-numeric:tabular-nums;

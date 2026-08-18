@@ -295,10 +295,16 @@
   }
 
   function modeBtn(m, key) {
+    /* two labels: the long one reads better, the short one keeps the bar on one
+       line on a narrow phone — Azerbaijani mode names are long. */
     return el('button', {
-      class: 'seg__btn', role: 'tab', 'data-mode': m, 'aria-selected': m === 'admin' ? 'true' : 'false',
-      text: B.i18n.t(key), onclick: function () { setMode(m); }
-    });
+      class: 'seg__btn', role: 'tab', 'data-mode': m,
+      'aria-selected': m === 'admin' ? 'true' : 'false',
+      'aria-label': B.i18n.t(key), onclick: function () { setMode(m); }
+    }, [
+      el('span', { class: 'mode-long', text: B.i18n.t(key) }),
+      el('span', { class: 'mode-short', text: B.i18n.t(key + '.s') })
+    ]);
   }
 
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', boot);

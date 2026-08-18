@@ -368,16 +368,18 @@ h4,h5{font-family:var(--font-ui);font-weight:600;font-size:var(--t-md);line-heig
 
 /* mode switcher (panel / client / side-by-side) */
 .modebar{display:flex;align-items:center;justify-content:center;gap:var(--s2);
-  padding:var(--s2) var(--s4);background:var(--ink);color:#fff;position:relative;z-index:60}
+  padding:var(--s2) var(--s4);background:var(--bar-bg);color:var(--bar-ink);position:relative;z-index:60}
 .modebar__brand{display:flex;align-items:center;gap:var(--s2);margin-right:auto;font-size:var(--t-sm);font-weight:600}
 .modebar__brand svg{width:1.25rem;height:1.25rem}
-.modebar .seg{background:rgba(255,255,255,.10)}
-.modebar .seg__btn{color:rgba(255,255,255,.72)}
-.modebar .seg__btn:hover{color:#fff}
-.modebar .seg__btn[aria-selected="true"]{background:rgba(255,255,255,.95);color:var(--ink)}
+.modebar .seg{background:var(--bar-hover)}
+.modebar .seg__btn{color:var(--bar-dim)}
+.modebar .seg__btn:hover{color:var(--bar-ink)}
+.modebar .seg__btn[aria-selected="true"]{background:var(--surface);color:var(--ink)}
 .modebar__right{margin-left:auto;display:flex;align-items:center;gap:var(--s2)}
-.modebar .btn--ghost{color:rgba(255,255,255,.78)}
-.modebar .btn--ghost:hover{background:rgba(255,255,255,.12);color:#fff}
+.mode-short{display:none}
+.modebar .seg{min-width:0}
+.modebar .btn--ghost{color:var(--bar-dim)}
+.modebar .btn--ghost:hover{background:var(--bar-hover);color:var(--bar-ink)}
 
 /* bottom tab bar (mobile) */
 .tabbar{display:none;position:sticky;bottom:0;z-index:45;
@@ -404,8 +406,8 @@ h4,h5{font-family:var(--font-ui);font-weight:600;font-size:var(--t-md);line-heig
   width:26rem;border-right:1px solid var(--line);background:var(--surface-sunken)}
 
 /* phone frame — only on wide screens; a real phone gets the raw page */
-.phone{display:flex;flex-direction:column;flex:1;min-height:0;background:var(--surface)}
-.phone__shell{display:flex;flex-direction:column;flex:1;min-height:0;overflow:hidden}
+.phone{display:flex;flex-direction:column;flex:1;min-width:0;min-height:0;max-width:100%;background:var(--surface)}
+.phone__shell{display:flex;flex-direction:column;flex:1;min-width:0;min-height:0;width:100%;overflow:hidden;background:var(--surface)}
 @media (min-width:1100px){
   .stage__client{display:flex;align-items:center;justify-content:center;padding:var(--s6)}
   .viewport[data-mode="client"] .stage__client{background:
@@ -414,8 +416,11 @@ h4,h5{font-family:var(--font-ui);font-weight:600;font-size:var(--t-md);line-heig
     border:.5rem solid #17141A;box-shadow:var(--sh-pop),0 0 0 1px rgba(0,0,0,.5);overflow:hidden;position:relative}
   .phone::before{content:"";position:absolute;top:.5rem;left:50%;transform:translateX(-50%);
     width:5.5rem;height:1.1rem;background:#17141A;border-radius:99px;z-index:20}
-  .viewport[data-mode="split"] .stage__client{width:28rem;padding:var(--s5)}
-  .viewport[data-mode="split"] .phone{width:100%;max-width:22rem;height:min(46rem,calc(100dvh - 8rem))}
+  /* In side-by-side the phone stays pinned while the panel scrolls beside it —
+     otherwise the panel's height pushes the phone below the fold. */
+  .viewport[data-mode="split"] .stage__client{
+    width:28rem;padding:var(--s5);position:sticky;top:0;align-self:flex-start;height:100dvh}
+  .viewport[data-mode="split"] .phone{width:100%;max-width:22rem;height:min(46rem,calc(100dvh - 6.5rem))}
 }
 
 /* ==========================================================================
@@ -446,8 +451,11 @@ h4,h5{font-family:var(--font-ui);font-weight:600;font-size:var(--t-md);line-heig
   .drawer[data-open]{transform:translateY(0)}
   .drawer__body{padding:var(--s4)}
   .toasts{right:var(--s3);left:var(--s3);bottom:var(--s3);max-width:none}
-  .modebar{padding-inline:var(--s3)}
+  .modebar{padding-inline:var(--s2);gap:var(--s1)}
   .modebar__brand span{display:none}
+  .mode-long{display:none}
+  .mode-short{display:inline}
+  .modebar .seg__btn{padding-inline:var(--s2)}
   .cmdk{padding-top:6vh}
 }
 

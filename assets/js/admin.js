@@ -140,22 +140,31 @@
     var wrap = el('div', { class: 'page' });
     var today = U.dkey(new Date());
 
+    var earned = k.revenue > 0;
     var line = k.appointments === 0
       ? 'Bu gün üçün hələ yazılış yoxdur.'
-      : 'Bu gün ' + k.appointments + ' yazılış var, ' + k.done + '-i tamamlanıb. Doluluq ' + k.occupancy + '%.';
+      : (earned
+        ? 'Bu gün ' + k.appointments + ' yazılış var, ' + k.done + '-i tamamlanıb. Doluluq ' + k.occupancy + '%.'
+        : 'Gün yenicə başlayır: ' + k.appointments + ' yazılış gözlənilir. Doluluq ' + k.occupancy + '%.');
 
     var brief = el('div', { class: 'daybrief' }, [
       el('div', { class: 'daybrief__main' }, [
         el('div', { class: 'eyebrow', text: B.i18n.dateLabel(new Date()) }),
         el('div', { class: 'daybrief__line' }, [
-          'Bu gün ', el('b', { text: U.money(k.revenue) }), ' gəlir. ',
+          earned ? 'Bu gün ' : 'Bu gün gözlənilir ',
+          el('b', { text: U.money(earned ? k.revenue : k.expected) }),
+          earned ? ' gəlir. ' : '. ',
           el('span', { class: 'muted', style: { fontSize: 'var(--t-md)', fontWeight: '400' }, text: line })
         ]),
         el('div', { class: 'daybrief__stats' }, [
           stat('Yazılış', k.appointments + '', k.pending ? k.pending + ' təsdiq gözləyir' : 'hamısı təsdiqlidir'),
-          stat('Orta çek', U.money(k.avgCheck), k.done + ' ödəniş'),
+          earned ? stat('Orta çek', U.money(k.avgCheck), k.done + ' ödəniş')
+            : stat('Gözlənilən', U.money(k.expected), 'bugünkü yazılışlara görə'),
           stat('Doluluq', k.occupancy + '%', 'ustaların iş vaxtına görə'),
-          stat('Dünənlə fərq', (k.revenueDelta >= 0 ? '+' : '') + k.revenueDelta + '%', 'gəlir üzrə', k.revenueDelta >= 0)
+          /* the day-over-day figure only means something once money has come in */
+          earned
+            ? stat('Dünənlə fərq', (k.revenueDelta >= 0 ? '+' : '') + k.revenueDelta + '%', 'gəlir üzrə', k.revenueDelta >= 0)
+            : stat('Dünən', U.money(st.revenueOn(U.dkey(U.addDays(new Date(), -1)), bid())), 'müqayisə üçün')
         ])
       ]),
       el('div', { class: 'daybrief__chart' }, [
@@ -355,7 +364,11 @@
     var rows = (closeM - openM) / 15;
 
     var scroll = el('div', { class: 'cal__scroll' });
-    var inner = el('div', { class: 'cal__inner', style: { '--cols': staff.length } });
+    var inner = el('div', {
+      class: 'cal__inner',
+      /* repeat() needs a literal count — a CSS variable is not allowed there */
+      style: { gridTemplateColumns: '3.75rem repeat(' + staff.length + ', minmax(var(--calendar-col-min), 1fr))' }
+    });
 
     inner.appendChild(el('div', { class: 'cal__corner' }));
     staff.forEach(function (s) {

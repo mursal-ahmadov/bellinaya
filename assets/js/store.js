@@ -451,8 +451,12 @@
     var yesterday = U.dkey(U.addDays(new Date(), -1));
     var revY = revenueOn(yesterday, branchId);
     var avg = paid.length ? Math.round(rev / paid.length) : 0;
+    var expected = todays.reduce(function (a, ap) {
+      return ap.status === 'cancelled' ? a : a + (ap.paidTotal != null ? ap.paidTotal : ap.price);
+    }, 0);
     return {
       revenue: rev,
+      expected: expected,
       revenueDelta: revY ? Math.round((rev - revY) / revY * 100) : 0,
       appointments: todays.filter(function (a) { return a.status !== 'cancelled'; }).length,
       pending: todays.filter(function (a) { return a.status === 'pending'; }).length,

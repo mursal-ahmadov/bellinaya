@@ -16,13 +16,26 @@ B.dom = (function () {
       if (k === 'class') node.className = v;
       else if (k === 'html') node.innerHTML = v;
       else if (k === 'text') node.textContent = v;
-      else if (k === 'style' && typeof v === 'object') Object.assign(node.style, v);
+      else if (k === 'style' && typeof v === 'object') setStyle(node, v);
       else if (k.slice(0, 2) === 'on' && typeof v === 'function') node.addEventListener(k.slice(2), v);
       else if (v === true) node.setAttribute(k, '');
       else node.setAttribute(k, v);
     }
     append(node, children);
     return node;
+  }
+  /**
+   * Applies a style object. Custom properties (--x) MUST go through
+   * setProperty — plain assignment on a CSSStyleDeclaration silently drops
+   * them, which is what previously blanked out every colour-coded element.
+   */
+  function setStyle(node, obj) {
+    for (var k in obj) {
+      var v = obj[k];
+      if (v === null || v === undefined) continue;
+      if (k.charAt(0) === '-' && k.charAt(1) === '-') node.style.setProperty(k, String(v));
+      else node.style[k] = v;
+    }
   }
   function append(parent, children) {
     if (children === null || children === undefined || children === false) return parent;
@@ -122,6 +135,7 @@ B.i18n = (function () {
       /* chrome */
       'app.tagline': 'Gözəllik salonu idarəetməsi',
       'mode.admin': 'Salon paneli', 'mode.client': 'Müştəri səhifəsi', 'mode.split': 'Yanaşı nümayiş',
+      'mode.admin.s': 'Salon', 'mode.client.s': 'Müştəri', 'mode.split.s': 'Yanaşı',
       'nav.overview': 'İcmal', 'nav.journal': 'Jurnal', 'nav.clients': 'Müştərilər',
       'nav.services': 'Xidmətlər', 'nav.products': 'Məhsullar', 'nav.cash': 'Kassa',
       'nav.payroll': 'Əməkhaqqı', 'nav.marketing': 'Marketinq', 'nav.analytics': 'Analitika',
@@ -157,6 +171,7 @@ B.i18n = (function () {
     ru: {
       'app.tagline': 'Управление салоном красоты',
       'mode.admin': 'Панель салона', 'mode.client': 'Страница клиента', 'mode.split': 'Рядом',
+      'mode.admin.s': 'Салон', 'mode.client.s': 'Клиент', 'mode.split.s': 'Рядом',
       'nav.overview': 'Обзор', 'nav.journal': 'Журнал', 'nav.clients': 'Клиенты',
       'nav.services': 'Услуги', 'nav.products': 'Товары', 'nav.cash': 'Касса',
       'nav.payroll': 'Зарплата', 'nav.marketing': 'Маркетинг', 'nav.analytics': 'Аналитика',
@@ -189,6 +204,7 @@ B.i18n = (function () {
     en: {
       'app.tagline': 'Beauty salon management',
       'mode.admin': 'Salon panel', 'mode.client': 'Client page', 'mode.split': 'Side by side',
+      'mode.admin.s': 'Salon', 'mode.client.s': 'Client', 'mode.split.s': 'Split',
       'nav.overview': 'Overview', 'nav.journal': 'Journal', 'nav.clients': 'Clients',
       'nav.services': 'Services', 'nav.products': 'Products', 'nav.cash': 'Cash desk',
       'nav.payroll': 'Payroll', 'nav.marketing': 'Marketing', 'nav.analytics': 'Analytics',

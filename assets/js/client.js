@@ -792,7 +792,10 @@
     root.appendChild(top);
     root.appendChild(scrollEl);
     root.appendChild(navEl);
-    host.appendChild(root);
+    /* On a wide screen the page sits inside a device frame so the demo reads as
+       "this is the phone". On an actual phone the frame collapses (see CSS) and
+       the page fills the screen for real. */
+    host.appendChild(el('div', { class: 'phone' }, el('div', { class: 'phone__shell' }, root)));
 
     flow.branchId = st.state.branches[0].id;
     flow.dateKey = U.dkey(new Date());

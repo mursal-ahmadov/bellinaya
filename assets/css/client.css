@@ -2,7 +2,7 @@
    Bellinaya — client-facing page (mobile first) + opening animation
    ========================================================================== */
 
-.cl{display:flex;flex-direction:column;flex:1;min-height:0;background:var(--surface);position:relative;overflow:hidden}
+.cl{display:flex;flex-direction:column;flex:1;min-width:0;min-height:0;width:100%;max-width:100%;background:var(--surface);position:relative;overflow:hidden}
 .cl__scroll{flex:1;min-height:0;overflow-y:auto;overscroll-behavior-y:contain;scroll-behavior:smooth}
 .cl__pad{padding:var(--s4) var(--s4) var(--s10)}
 
@@ -46,9 +46,9 @@
 .branchcard:hover{border-color:var(--line-2);box-shadow:var(--sh-2)}
 .branchcard[aria-pressed="true"]{border-color:var(--accent);background:var(--accent-soft)}
 .branchcard__dot{width:.625rem;height:.625rem;border-radius:99px;margin-top:.4375rem;flex:none}
-.branchcard__body{flex:1;min-width:0}
-.branchcard__name{font-size:var(--t-md);font-weight:600;line-height:1.25}
-.branchcard__meta{font-size:var(--t-sm);color:var(--ink-2);margin-top:.125rem}
+.branchcard__body{flex:1;min-width:0;display:block}
+.branchcard__name{display:block;font-size:var(--t-md);font-weight:600;line-height:1.25}
+.branchcard__meta{display:block;font-size:var(--t-sm);color:var(--ink-2);margin-top:.125rem}
 .branchcard__hours{font-size:var(--t-xs);color:var(--ink-3);margin-top:.25rem;display:flex;align-items:center;gap:.3125rem}
 .branchcard__hours svg{width:.875rem;height:.875rem}
 
@@ -64,8 +64,8 @@
   border-bottom:1px solid var(--line);transition:background var(--d-1) var(--e-out)}
 .svcrow:last-child{border-bottom:0}
 .svcrow:hover{background:var(--surface-2)}
-.svcrow__body{flex:1;min-width:0}
-.svcrow__name{font-size:var(--t-md);font-weight:550;line-height:1.3}
+.svcrow__body{flex:1;min-width:0;display:block}
+.svcrow__name{display:block;font-size:var(--t-md);font-weight:550;line-height:1.3}
 .svcrow__meta{font-size:var(--t-xs);color:var(--ink-3);margin-top:.125rem;display:flex;align-items:center;gap:.3125rem}
 .svcrow__meta svg{width:.8125rem;height:.8125rem}
 .svcrow__price{font-weight:650;font-variant-numeric:tabular-nums;white-space:nowrap}
@@ -79,9 +79,9 @@
   border:1px solid var(--line);border-radius:var(--r-md);background:var(--surface);transition:all var(--d-1) var(--e-out)}
 .mastercard:hover{border-color:var(--line-2)}
 .mastercard[aria-pressed="true"]{border-color:var(--accent);background:var(--accent-soft)}
-.mastercard__body{flex:1;min-width:0}
-.mastercard__name{font-size:var(--t-md);font-weight:600;line-height:1.25}
-.mastercard__role{font-size:var(--t-xs);color:var(--ink-3)}
+.mastercard__body{flex:1;min-width:0;display:block}
+.mastercard__name{display:block;font-size:var(--t-md);font-weight:600;line-height:1.25}
+.mastercard__role{display:block;font-size:var(--t-xs);color:var(--ink-3)}
 .mastercard__rate{display:flex;align-items:center;gap:.1875rem;font-size:var(--t-xs);font-weight:650;color:var(--warn)}
 .mastercard__rate svg{width:.8125rem;height:.8125rem;fill:currentColor}
 
