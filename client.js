@@ -397,18 +397,18 @@ function vDeskSite() {
     }).join('');
     body = `
     <div>
-      <div style="position:relative;display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:0;background-image:repeating-linear-gradient(135deg,#E1DCEA 0 11px,#EFEBF3 11px 12px)">
-        <div style="padding:min(62px,5vw) min(46px,4vw)">
-          <div style="${F_MONO};font-size:9.5px;letter-spacing:.18em;color:#7C7496;text-transform:uppercase;margin-bottom:16px">${t.tag}</div>
-          <div style="${F_SERIF};font-size:clamp(38px,4.6vw,66px);line-height:1.02;letter-spacing:-.01em;color:#17141F">${L(brSel)}</div>
-          <div style="font-size:14px;color:#4A4358;margin-top:12px">${L(brSel.addr)}</div>
-          <div style="display:flex;align-items:center;gap:9px;font-size:13px;color:#4A4358;margin-top:20px;flex-wrap:wrap">
-            <span style="color:#B4552D">★ 4.9</span><span style="color:#B6AECB">·</span>
-            <span>320 ${t.phRate}</span><span style="color:#B6AECB">·</span><span>${t.phTeam}</span>
+      <div style="position:relative;min-height:clamp(380px,44vw,540px);background:url('${brSel.img}') center/cover no-repeat #E1DCEA;display:flex;align-items:flex-end">
+        <div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(23,20,31,.62) 0%,rgba(23,20,31,.26) 44%,rgba(23,20,31,0) 72%),linear-gradient(100deg,rgba(23,20,31,.78) 0%,rgba(23,20,31,.48) 38%,rgba(23,20,31,.1) 68%,rgba(23,20,31,0) 88%)"></div>
+        <div style="position:relative;padding:min(62px,5vw) min(46px,4vw);max-width:760px">
+          <div style="${F_MONO};font-size:9.5px;letter-spacing:.18em;color:#C9C2D8;text-transform:uppercase;margin-bottom:16px">${t.tag}</div>
+          <div style="${F_SERIF};font-size:clamp(38px,4.6vw,66px);line-height:1.02;letter-spacing:-.01em;color:#F7F5FA;text-shadow:0 2px 24px rgba(23,20,31,.35)">${L(brSel)}</div>
+          <div style="font-size:14px;color:#D8D2E2;margin-top:12px">${L(brSel.addr)}</div>
+          <div style="display:flex;align-items:center;gap:9px;font-size:13px;color:#D8D2E2;margin-top:18px;flex-wrap:wrap">
+            <span style="color:#E5A96B">★ 4.9</span><span style="color:#8A82A0">·</span>
+            <span>320 ${t.phRate}</span><span style="color:#8A82A0">·</span><span>${t.phTeam}</span>
           </div>
-          <button data-c="${hnd(() => ME ? P({ sc: 'book', step: 1, t: null }) : P({ sc: 'auth', after: 'book', step: 1 }))}" style="margin-top:28px;padding:16px 34px;border-radius:13px;border:none;background:#3B2E5A;color:#F2F0EA;font-size:15px;font-weight:700">${t.phBook}</button>
+          <button data-c="${hnd(() => ME ? P({ sc: 'book', step: 1, t: null }) : P({ sc: 'auth', after: 'book', step: 1 }))}" style="margin-top:26px;padding:16px 34px;border-radius:13px;border:none;background:#F2F0EA;color:#17141F;font-size:15px;font-weight:700;box-shadow:0 12px 32px rgba(23,20,31,.35)">${t.phBook}</button>
         </div>
-        <div style="min-height:300px;background:url('${brSel.img}') center/cover no-repeat #E1DCEA"></div>
       </div>
       <div style="padding:min(46px,4vw) min(46px,4vw) 0">
         <div style="${LBL};letter-spacing:.16em;margin-bottom:12px">${t.phBr}</div>
