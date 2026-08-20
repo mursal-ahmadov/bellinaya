@@ -6,15 +6,10 @@ function vHeader() {
   const t = T();
   const pill = (on) => 'padding:5px 12px;border-radius:8px;border:none;background:' + (on ? '#F2F0EA' : 'transparent') +
     ';color:' + (on ? '#17141F' : '#8B839B') + ';font-size:11.5px;font-weight:' + (on ? 700 : 500) + ';letter-spacing:.02em;transition:all .16s';
-  const viewTabs = [['panel', t.vPanel], ['both', t.vBoth], ['phone', t.vPhone]].map(([id, label]) =>
+  const viewTabs = [['panel', t.vPanel], ['client', t.vPhone]].map(([id, label]) =>
     '<button data-c="' + hnd(() => { S.view = id; commit(); }) + '" style="' + pill(S.view === id) + '">' + label + '</button>').join('');
   const langTabs = [['az', 'AZ'], ['ru', 'RU']].map(([id, label]) =>
     '<button data-c="' + hnd(() => { S.lang = id; commit(); }) + '" style="' + pill(S.lang === id) + ';' + F_MONO + ';font-size:10.5px;letter-spacing:.08em">' + label + '</button>').join('');
-  const devTabs = S.view === 'phone'
-    ? '<div class="hide-narrow" style="display:flex;gap:2px;padding:3px;background:#221E2C;border-radius:11px">' +
-      [['mobile', t.devPhone], ['desktop', t.devDesk]].map(([id, label]) =>
-        '<button data-c="' + hnd(() => { S.phDev = id; commit(); }) + '" style="' + pill(S.phDev === id) + '">' + label + '</button>').join('') + '</div>'
-    : '';
   const staff = S.auth.staff;
   const unread = S.notif.filter(n => !n.read).length;
   const staffChip = staff ? `
@@ -43,21 +38,9 @@ function vHeader() {
       <span style="width:6px;height:6px;border-radius:50%;background:#5FA88C;animation:bl-blink 2.4s infinite"></span>
       <span style="color:#8B839B;text-transform:uppercase">${t.live}</span>
     </div>
-    ${devTabs}
     <div style="display:flex;gap:2px;padding:3px;background:#221E2C;border-radius:11px">${langTabs}</div>
     ${staffChip}
   </header>`;
-}
-
-function vHint() {
-  if (S.hintOff || S.view !== 'both') return '';
-  const t = T();
-  return `
-  <div style="flex-shrink:0;display:flex;align-items:center;gap:14px;padding:8px 20px;background:#EDE9F3;border-bottom:1px solid #DDD5EA">
-    <span style="width:7px;height:7px;border-radius:50%;background:#3B2E5A;flex-shrink:0;animation:bl-blink 2.4s infinite"></span>
-    <span style="flex:1;font-size:12px;color:#2E2740;line-height:1.45">${t.hintBar}</span>
-    <button data-c="${hnd(() => { S.hintOff = true; commit(); })}" style="padding:5px 13px;border-radius:8px;border:1px solid #C9BEDD;background:#FBFAF8;color:#3B2E5A;font-size:11.5px;font-weight:600;flex-shrink:0">${t.hintClose}</button>
-  </div>`;
 }
 
 /* ---------- login ---------- */

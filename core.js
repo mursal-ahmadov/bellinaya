@@ -71,7 +71,7 @@ function seedHist() {
 function defaults() {
   const narrow = window.innerWidth < 880;
   return {
-    lang: 'az', view: narrow ? 'phone' : 'both', pv: 'over', b: 'b1', day: 0,
+    lang: 'az', view: narrow ? 'client' : 'panel', pv: 'over', b: 'b1', day: 0,
     cls: CLIENTS.map(c => ({ ...c })),
     auth: { staff: null, client: null },
     login: { role: 'owner', pin: '', err: '' },
@@ -89,8 +89,7 @@ function defaults() {
     prodQ: null, prices: null, drawer: null, co: null, quick: null, resc: null,
     cSel: 'c1', cq: '', svcCat: 'hair', toast: null, fresh: [], dayClosed: false,
     ph: { sc: 'home', step: 1, b: 'b1', cat: null, s: null, m: 'any', d: 0, t: null, cart: [], done: null, ordered: false, resc: null, after: null },
-    railOpen: !narrow && window.innerWidth >= 1240,
-    phDev: 'mobile', nowMin: nowMin(), hintOff: false
+    nowMin: nowMin()
   };
 }
 
@@ -102,7 +101,7 @@ function boot() {
   return { ...d,
     appts: sv.appts || d.appts, tx: sv.tx || d.tx, cls: sv.cls || d.cls,
     prodQ: sv.prodQ || null, prices: sv.prices || null, auth: sv.auth || d.auth,
-    notif: sv.notif || [], dayClosed: !!sv.dayClosed, hintOff: !!sv.hintOff,
+    notif: sv.notif || [], dayClosed: !!sv.dayClosed,
     ph: { ...d.ph, b: sv.phB || d.ph.b, cart: sv.cart || [] } };
 }
 
@@ -113,7 +112,7 @@ function save() {
   try {
     localStorage.setItem(KEY, JSON.stringify({ v: 3,
       appts: S.appts, tx: S.tx, cls: S.cls, prodQ: S.prodQ, prices: S.prices,
-      auth: S.auth, notif: S.notif, dayClosed: S.dayClosed, hintOff: S.hintOff,
+      auth: S.auth, notif: S.notif, dayClosed: S.dayClosed,
       phB: S.ph.b, cart: S.ph.cart }));
   } catch (e) {}
 }

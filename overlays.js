@@ -305,7 +305,7 @@ function vZr() {
 /* ---------- toast ---------- */
 function vToast() {
   if (!S.toast) return '';
-  const pos = S.view !== 'phone' ? 'left:206px' : 'left:50%;transform:translateX(-50%)';
+  const pos = S.view === 'panel' && S.auth.staff ? 'left:206px' : 'left:50%;transform:translateX(-50%)';
   return `
   <div style="position:fixed;${pos};bottom:22px;z-index:400;display:flex;align-items:center;gap:10px;padding:13px 18px;border-radius:12px;background:#17141F;color:#F2F0EA;box-shadow:0 18px 40px rgba(0,0,0,.3);animation:bl-up .22s ease-out;max-width:min(420px,90vw)">
     <span style="width:7px;height:7px;border-radius:50%;background:#5FA88C;flex-shrink:0"></span>
@@ -316,25 +316,19 @@ function vToast() {
 /* ---------- app root ---------- */
 function App() {
   const staff = S.auth.staff;
-  const deskSite = S.view === 'phone' && S.phDev === 'desktop';
-  let panelPart = '';
-  if (S.view !== 'phone') panelPart = staff ? vPanel() : vLogin();
-  let clientPart = '';
-  if (deskSite) clientPart = vDeskSite();
-  else if (S.view !== 'panel') clientPart = vPhoneRail();
+  const main = S.view === 'client' ? vDeskSite() : (staff ? vPanel() : vLogin());
+  const inPanel = S.view === 'panel' && staff;
   return `
   <div style="height:100vh;height:100dvh;display:flex;flex-direction:column;background:#F2F0EA;overflow:hidden">
     ${vHeader()}
-    ${vHint()}
     <div style="flex:1;min-height:0;display:flex">
-      ${panelPart}
-      ${clientPart}
+      ${main}
     </div>
-    ${staff ? vDrawer() : ''}
-    ${staff ? vCo() : ''}
-    ${staff ? vQc() : ''}
-    ${staff ? vNotif() : ''}
-    ${staff ? vZr() : ''}
+    ${inPanel ? vDrawer() : ''}
+    ${inPanel ? vCo() : ''}
+    ${inPanel ? vQc() : ''}
+    ${inPanel ? vNotif() : ''}
+    ${inPanel ? vZr() : ''}
     ${vToast()}
   </div>`;
 }
@@ -366,6 +360,24 @@ let rsT = null;
 window.addEventListener('resize', () => {
   if (rsT) clearTimeout(rsT);
   rsT = setTimeout(render, 180);
+});
+
+/* Cross-window live sync: open the panel in one window and the client site in
+   another — a booking made in one appears in the other instantly. */
+window.addEventListener('storage', (e) => {
+  if (e.key !== KEY || !e.newValue) return;
+  try {
+    const sv = JSON.parse(e.newValue);
+    if (!sv || sv.v !== 3) return;
+    S.appts = sv.appts || S.appts;
+    S.tx = sv.tx || S.tx;
+    S.cls = sv.cls || S.cls;
+    S.prodQ = sv.prodQ || null;
+    S.prices = sv.prices || null;
+    S.notif = sv.notif || [];
+    S.dayClosed = !!sv.dayClosed;
+    render();
+  } catch (err) {}
 });
 
 document.addEventListener('DOMContentLoaded', render);

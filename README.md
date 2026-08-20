@@ -11,7 +11,7 @@
 Gözəllik salonları üçün onlayn yazılış və idarəetmə sistemi. Nümayişdə iki tərəf var
 və onlar **canlı bağlıdır**:
 
-- **Müştəri tərəfi** — telefon görünüşündə: yazılış (5 addım), SMS ilə giriş,
+- **Müştəri tərəfi** — salonun veb-saytı: yazılış (5 addım), SMS ilə giriş,
   yazılışa baxış, vaxt dəyişmə, ləğv, kosmetika mağazası və səbət.
 - **Salon paneli** — icmal, jurnal (sürüklə-burax təqvim), müştəri bazası,
   xidmətlər və qiymətlər, anbar, kassa (ödəniş + çek + gün bağlanışı Z-hesabatı),
@@ -24,11 +24,12 @@ jurnalda yeni kart işıqlanır, bildiriş zəngi yanır.
 
 ## Nümayiş ssenarisi
 
-Yuxarıdakı zolaqdan **Panel / İkisi / Müştəri** görünüşləri arasında keçid edin.
-Ən təsirli variant «İkisi»dir: solda panel, sağda müştəri telefonu.
+Yuxarıdakı zolaqdan **Panel / Müştəri** görünüşləri arasında keçid edin.
+Ən təsirli variant: linki **iki ayrı pəncərədə** açın — birində panel, o birində
+müştəri saytı. Bir pəncərədə edilən əməliyyat o birində dərhal görünür.
 
 1. **Panelə daxil olun.** Rol seçin — Salon sahibi (PIN `2024`) və ya Resepşn (PIN `1010`).
-2. **Müştəri kimi yazılın.** Sağdakı telefonda «Yazılış et» → nömrə `051 220 66 15` →
+2. **Müştəri kimi yazılın.** «Müştəri» görünüşündə «Yazılış et» → nömrə `051 220 66 15` →
    SMS kodu `5417` → filial, xidmət, usta, vaxt seçin → təsdiqləyin.
 3. **Panelə baxın.** Jurnalda yeni ONLINE yazılış pulsasiya ilə görünür,
    zəngdə bildiriş yanır, «Jurnal» menyusunda sayğac artır.
@@ -54,7 +55,10 @@ panelin müştəri bazasına düşəcək.
 - **Dil** — Azərbaycanca əsas, rus dilinə tam keçid.
 - **Yaddaş** — bütün dəyişikliklər brauzerin yaddaşında qalır;
   «Demo məlumatı sıfırla» ilkin vəziyyətə qaytarır.
-- **Responsivlik** — telefonda açanda müştəri görünüşü avtomatik tam ekran olur.
+- **İki pəncərə sinxronu** — eyni brauzerdə iki pəncərə açanda (panel + müştəri)
+  əməliyyatlar canlı ötürülür.
+- **Responsivlik** — telefonda açanda müştəri görünüşü avtomatik seçilir,
+  sayt mobil ekrana tam uyğunlaşır.
 
 ---
 
@@ -69,7 +73,7 @@ app.css       baza stillər və animasiyalar
 data.js       demo məlumat + AZ/RU tərcümə lüğətləri
 core.js       vəziyyət, əməliyyatlar, hadisə mexanizmi
 panel.js      salon paneli ekranları
-client.js     müştəri tərəfi (telefon + veb-sayt görünüşü)
+client.js     müştəri tərəfi (responsiv veb-sayt)
 overlays.js   pəncərələr (yazılış kartı, ödəniş, Z-hesabat) və işə salma
 dizayn/       ilkin dizayn faylı (istinad üçün)
 ```
