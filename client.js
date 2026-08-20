@@ -5,8 +5,8 @@
 function cBrList(compact) {
   const p = S.ph;
   return BRANCHES.map(b => `
-    <button data-c="${hnd(() => P({ b: b.id }))}" style="display:flex;align-items:center;gap:11px;width:100%;padding:13px 14px;border-radius:13px;text-align:left;border:1px solid ${p.b === b.id ? '#3B2E5A' : '#E4E0D6'};background:${p.b === b.id ? '#EDE9F3' : '#FBFAF8'};margin-bottom:8px">
-      <span style="width:9px;height:9px;border-radius:50%;flex-shrink:0;background:${p.b === b.id ? '#3B2E5A' : '#D8D3C6'}"></span>
+    <button data-c="${hnd(() => P({ b: b.id }))}" style="display:flex;align-items:center;gap:11px;width:100%;padding:10px 12px 10px 10px;border-radius:13px;text-align:left;border:1px solid ${p.b === b.id ? '#3B2E5A' : '#E4E0D6'};background:${p.b === b.id ? '#EDE9F3' : '#FBFAF8'};margin-bottom:8px">
+      <span style="width:46px;height:46px;border-radius:10px;flex-shrink:0;background:url('${b.img}') center/cover no-repeat #E4E0D6;box-shadow:inset 0 0 0 1px rgba(23,20,31,.08)"></span>
       <span style="flex:1;min-width:0">
         <span style="display:block;font-size:${compact ? 12.5 : 13}px;font-weight:650">${L(b)}</span>
         <span style="display:block;font-size:${compact ? 11 : 11.5}px;color:#8D8677">${L(b.addr)}</span>
@@ -126,8 +126,26 @@ function cStepBody(compact) {
         <div style="font-size:12px;color:#8D8677;margin-top:3px">${L(brSel.addr)}</div>
         <div style="${F_MONO};font-size:12px;color:#5F5849;margin-top:8px">${brSel.tel}</div>
       </div>
-      <div style="min-height:96px;border-radius:12px;display:grid;place-items:center;background-image:repeating-linear-gradient(135deg,#EDE9F3 0 9px,#F7F5F0 9px 10px)">
-        <span style="${F_MONO};font-size:9px;letter-spacing:.12em;color:#8A82A0;text-transform:uppercase">${t.phMap}</span>
+      <div style="min-height:110px;border-radius:12px;overflow:hidden">
+        <svg viewBox="0 0 300 120" preserveAspectRatio="xMidYMid slice" style="display:block;width:100%;height:100%;min-height:110px">
+          <rect width="300" height="120" fill="#E7E2ED"/>
+          <rect x="200" y="34" width="42" height="36" rx="7" fill="#CFE0D6"/>
+          <g stroke="#F6F4EE" stroke-width="7" stroke-linecap="round" fill="none">
+            <line x1="-4" y1="30" x2="304" y2="26"/>
+            <line x1="-4" y1="84" x2="304" y2="90"/>
+            <line x1="66" y1="-4" x2="78" y2="124"/>
+            <line x1="186" y1="-4" x2="178" y2="124"/>
+            <line x1="248" y1="-4" x2="258" y2="124"/>
+          </g>
+          <g stroke="#F0EDE6" stroke-width="3" fill="none">
+            <line x1="-4" y1="58" x2="304" y2="54"/>
+            <line x1="122" y1="-4" x2="128" y2="124"/>
+          </g>
+          <g transform="translate(150,54)">
+            <path d="M0,20 C-9.5,7 -14,-2 -14,-8.5 A14,14 0 1 1 14,-8.5 C14,-2 9.5,7 0,20 Z" fill="#3B2E5A"/>
+            <circle cy="-8.5" r="6" fill="#F2F0EA"/>
+          </g>
+        </svg>
       </div>
     </div>
     <div style="font-size:12px;color:#8D8677;line-height:1.6;text-wrap:pretty;margin-top:14px">${t.phPolicy}</div>
@@ -176,7 +194,7 @@ function cAuth(compact) {
     <div>
       <div style="font-size:${compact ? 13 : 14}px;color:#8D8677;line-height:1.55;margin-bottom:20px">${t.authS}</div>
       <div style="${LBL9};margin-bottom:7px">${t.qcPhone}</div>
-      <input data-f="clphone" value="${esc(c.phone)}" inputmode="tel" data-in="${hnd((e) => { S.clog = { ...S.clog, phone: e.target.value, err: '' }; commit(); })}" data-kd="${hnd((e) => { if (e.key === 'Enter') sendCode(); })}" placeholder="050 000 00 00" style="width:100%;padding:14px 16px;border-radius:12px;border:1px solid #DED9CD;background:#FBFAF8;${F_MONO};font-size:16px" />
+      <input data-f="clphone" value="${esc(c.phone)}" inputmode="tel" data-in="${hnd((e) => { S.clog.phone = e.target.value; if (S.clog.err) { S.clog = { ...S.clog, err: '' }; commit(); } else stash(); })}" data-kd="${hnd((e) => { if (e.key === 'Enter') sendCode(); })}" placeholder="050 000 00 00" style="width:100%;padding:14px 16px;border-radius:12px;border:1px solid #DED9CD;background:#FBFAF8;${F_MONO};font-size:16px" />
       ${errH}
       <button data-c="${hnd(sendCode)}" style="${btn}">${t.authSend}</button>
       <div style="font-size:11.5px;color:#9A9284;line-height:1.5;margin-top:14px">${t.authWhy}</div>
@@ -186,7 +204,7 @@ function cAuth(compact) {
     <div>
       <div style="font-size:${compact ? 13 : 14}px;color:#8D8677;line-height:1.55;margin-bottom:20px"><span style="${F_MONO};color:#17141F">${esc(c.phone)}</span> ${t.authCodeS}</div>
       <div style="${LBL9};margin-bottom:7px">${t.authCode}</div>
-      <input data-f="clcode" value="${esc(c.code)}" inputmode="numeric" data-in="${hnd((e) => { S.clog = { ...S.clog, code: e.target.value.replace(/\D/g, '').slice(0, 4), err: '' }; commit(); })}" data-kd="${hnd((e) => { if (e.key === 'Enter') verifyCode(); })}" placeholder="••••" style="width:100%;padding:14px 16px;border-radius:12px;border:1px solid #DED9CD;background:#FBFAF8;${F_MONO};font-size:22px;letter-spacing:.4em;text-align:center" />
+      <input data-f="clcode" value="${esc(c.code)}" inputmode="numeric" data-in="${hnd((e) => { const v = e.target.value.replace(/\D/g, '').slice(0, 4); e.target.value = v; S.clog.code = v; if (S.clog.err) { S.clog = { ...S.clog, err: '' }; commit(); } else stash(); })}" data-kd="${hnd((e) => { if (e.key === 'Enter') verifyCode(); })}" placeholder="••••" style="width:100%;padding:14px 16px;border-radius:12px;border:1px solid #DED9CD;background:#FBFAF8;${F_MONO};font-size:22px;letter-spacing:.4em;text-align:center" />
       ${errH}
       <button data-c="${hnd(verifyCode)}" style="${btn}">${t.authVerify}</button>
       <button data-c="${hnd(() => { S.clog = { ...S.clog, step: 'phone', err: '', code: '' }; commit(); })}" style="width:100%;margin-top:9px;padding:12px 0;border-radius:11px;border:1px solid #DED9CD;background:transparent;color:#5F5849;font-size:12.5px">${t.authChange}</button>
@@ -196,12 +214,12 @@ function cAuth(compact) {
     <div>
       <div style="font-size:${compact ? 13 : 14}px;color:#8D8677;line-height:1.55;margin-bottom:20px">${t.authNameS}</div>
       <div style="${LBL9};margin-bottom:7px">${t.authName}</div>
-      <input data-f="clname" value="${esc(c.name)}" data-in="${hnd((e) => { S.clog = { ...S.clog, name: e.target.value, err: '' }; commit(); })}" data-kd="${hnd((e) => { if (e.key === 'Enter') finishSignup(); })}" style="width:100%;padding:14px 16px;border-radius:12px;border:1px solid #DED9CD;background:#FBFAF8;font-size:15px" />
+      <input data-f="clname" value="${esc(c.name)}" data-in="${hnd((e) => { S.clog.name = e.target.value; if (S.clog.err) { S.clog = { ...S.clog, err: '' }; commit(); } else stash(); })}" data-kd="${hnd((e) => { if (e.key === 'Enter') finishSignup(); })}" style="width:100%;padding:14px 16px;border-radius:12px;border:1px solid #DED9CD;background:#FBFAF8;font-size:15px" />
       ${errH}
       <button data-c="${hnd(finishSignup)}" style="${btn}">${t.authSignup}</button>
     </div>`;
   return `
-  <div style="max-width:440px;margin:0 auto;padding:${compact ? '26px 18px 30px' : 'min(56px,4.6vw) min(46px,4vw)'};animation:bl-up .28s ease-out">
+  <div style="max-width:440px;margin:0 auto;padding:${compact ? '26px 18px 30px' : 'min(56px,4.6vw) min(46px,4vw)'};${animIf('auth:' + c.step, 'animation:bl-up .28s ease-out')}">
     <div style="width:44px;height:44px;border-radius:13px;background:#EDE9F3;color:#3B2E5A;display:grid;place-items:center;font-size:19px;margin-bottom:16px">◍</div>
     <h2 style="${F_SERIF};font-size:${compact ? '23px' : 'clamp(26px,2.6vw,34px)'};font-weight:400;margin:0 0 6px">${t.authT}</h2>
     ${body}
@@ -213,7 +231,7 @@ function cOk(compact) {
   const a = p.done ? S.appts.find(x => x.id === p.done.id) : null;
   if (!a) return '';
   return `
-  <div style="${compact ? 'padding:34px 20px' : 'max-width:560px;margin:0 auto;padding:min(62px,5vw) min(46px,4vw)'};text-align:center;animation:bl-up .35s ease-out">
+  <div style="${compact ? 'padding:34px 20px' : 'max-width:560px;margin:0 auto;padding:min(62px,5vw) min(46px,4vw)'};text-align:center;${animIf('ok', 'animation:bl-up .35s ease-out')}">
     <div style="width:${compact ? 58 : 66}px;height:${compact ? 58 : 66}px;border-radius:50%;background:#E7EFEA;color:#2F6B5E;display:grid;place-items:center;font-size:${compact ? 26 : 30}px;margin:0 auto ${compact ? 16 : 20}px">✓</div>
     <h2 style="${F_SERIF};font-size:${compact ? '24px' : 'clamp(26px,2.6vw,34px)'};font-weight:400;margin:0 0 ${compact ? 8 : 10}px">${t.phDone}</h2>
     <div style="font-size:${compact ? 12 : 13}px;color:#8D8677;line-height:1.55;text-wrap:pretty;margin-bottom:${compact ? 20 : 24}px">${t.phDoneS}</div>
@@ -289,7 +307,7 @@ function cShop(compact) {
     const soon = qty(pr.id) <= 2;
     return `
     <div style="background:#FBFAF8;border-radius:14px;padding:${compact ? '10px 11px 12px' : '12px 13px 14px'}">
-      <div style="height:${compact ? 74 : 96}px;border-radius:10px;margin-bottom:9px;background-image:repeating-linear-gradient(135deg,#EDE9F3 0 7px,#F7F5F0 7px 8px)"></div>
+      <div style="height:${compact ? 74 : 116}px;border-radius:10px;margin-bottom:9px;background:url('${pr.img}') center/cover no-repeat #EDE9F3"></div>
       <div style="font-size:${compact ? 11.5 : 13}px;font-weight:600;line-height:1.3;min-height:${compact ? 30 : 35}px">${L(pr)}</div>
       <div style="display:flex;align-items:center;gap:6px;margin:${compact ? '6px 0 8px' : '8px 0 11px'}">
         <span style="${F_MONO};font-size:${compact ? 13 : 15}px">${pr.p} ₼</span>
@@ -320,7 +338,7 @@ function cCart(compact) {
   }).join('');
   const cartTot = p.cart.reduce((a, i) => a + PRODS.find(x => x.id === i.id).p * i.n, 0);
   const orderedH = p.ordered ? `
-    <div style="background:#E7EFEA;border-radius:${compact ? 14 : 16}px;padding:${compact ? '18px 16px' : '24px 20px'};text-align:center;animation:bl-up .3s ease-out">
+    <div style="background:#E7EFEA;border-radius:${compact ? 14 : 16}px;padding:${compact ? '18px 16px' : '24px 20px'};text-align:center;${animIf('ordered', 'animation:bl-up .3s ease-out')}">
       <div style="font-size:${compact ? 24 : 28}px;color:#2F6B5E;margin-bottom:${compact ? 6 : 8}px">✓</div>
       <div style="font-size:${compact ? 14 : 15}px;font-weight:650;color:#2F6B5E">${t.phOrdered}</div>
       <div style="font-size:${compact ? 11.5 : 12.5}px;color:#4A7A6C;margin-top:5px;line-height:1.5">${t.phPickup}</div>
@@ -390,9 +408,7 @@ function vDeskSite() {
           </div>
           <button data-c="${hnd(() => ME ? P({ sc: 'book', step: 1, t: null }) : P({ sc: 'auth', after: 'book', step: 1 }))}" style="margin-top:28px;padding:16px 34px;border-radius:13px;border:none;background:#3B2E5A;color:#F2F0EA;font-size:15px;font-weight:700">${t.phBook}</button>
         </div>
-        <div style="min-height:300px;display:grid;place-items:center">
-          <span style="${F_MONO};font-size:10px;letter-spacing:.14em;color:#8A82A0;text-transform:uppercase">${t.phHero}</span>
-        </div>
+        <div style="min-height:300px;background:url('${brSel.img}') center/cover no-repeat #E1DCEA"></div>
       </div>
       <div style="padding:min(46px,4vw) min(46px,4vw) 0">
         <div style="${LBL};letter-spacing:.16em;margin-bottom:12px">${t.phBr}</div>

@@ -53,7 +53,8 @@ function vLogin() {
       <span style="display:block;font-size:11px;color:#8D8677;margin-top:3px">${t.demoPin} ${id === 'owner' ? '2024' : '1010'}</span>
     </button>`).join('');
   return `
-  <div style="flex:1;min-width:0;display:grid;place-items:center;padding:30px;background:#F2F0EA;overflow:auto">
+  <div style="flex:1;min-width:0;display:flex;background:#F2F0EA">
+  <div style="flex:1;min-width:0;display:grid;place-items:center;padding:30px;overflow:auto">
     <div style="width:100%;max-width:392px">
       <div style="${F_SERIF};font-size:21px;letter-spacing:.16em;margin-bottom:26px">BELLINAYA</div>
       <div style="${F_SERIF};font-size:29px;margin-bottom:5px">${t.loginT}</div>
@@ -61,13 +62,20 @@ function vLogin() {
       <div style="display:flex;gap:9px;margin-bottom:16px">${roles}</div>
       <div style="${LBL9};margin-bottom:7px">${t.pin}</div>
       <input data-f="pin" value="${esc(l.pin)}" inputmode="numeric" autocomplete="off"
-        data-in="${hnd((e) => { S.login = { ...S.login, pin: e.target.value.replace(/\D/g, '').slice(0, 4), err: '' }; commit(); })}"
+        data-in="${hnd((e) => { const v = e.target.value.replace(/\D/g, '').slice(0, 4); e.target.value = v; S.login.pin = v; if (S.login.err) { S.login = { ...S.login, err: '' }; commit(); } else stash(); })}"
         data-kd="${hnd((e) => { if (e.key === 'Enter') staffIn(); })}"
         placeholder="••••" style="width:100%;padding:14px 16px;border-radius:12px;border:1px solid #DED9CD;background:#FBFAF8;${F_MONO};font-size:20px;letter-spacing:.4em;text-align:center" />
       ${l.err ? '<div style="margin-top:9px;font-size:12px;color:#C0392B">' + t.errPin + '</div>' : ''}
       <button data-c="${hnd(staffIn)}" style="width:100%;margin-top:14px;padding:15px 0;border-radius:12px;border:none;background:#3B2E5A;color:#F2F0EA;font-size:14px;font-weight:700">${t.enter}</button>
       <button data-c="${hnd(resetDemo)}" style="width:100%;margin-top:9px;padding:11px 0;border-radius:11px;border:1px solid #E4E0D6;background:transparent;color:#8D8677;font-size:11.5px">${t.reset}</button>
     </div>
+  </div>
+  <div class="hide-narrow" style="flex:1.1;min-width:0;position:relative;background:url('img/b1.jpg') center/cover no-repeat #E1DCEA">
+    <div style="position:absolute;left:0;right:0;bottom:0;padding:26px 30px 24px;background:linear-gradient(transparent,rgba(23,20,31,.62))">
+      <div style="${F_SERIF};font-size:22px;color:#F2F0EA;letter-spacing:.02em">${L(BRANCHES[0])}</div>
+      <div style="font-size:12px;color:#D8D2E2;margin-top:4px">${t.tag} · ${L(BRANCHES[0].addr)}</div>
+    </div>
+  </div>
   </div>`;
 }
 

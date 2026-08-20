@@ -60,22 +60,22 @@ const MASTERS = [
 ];
 
 const BRANCHES = [
-  {id:'b1',short:'Nərimanov',az:'Bellinaya Nərimanov',ru:'Bellinaya Нариманов',addr:{az:'Atatürk pr. 42',ru:'пр. Ататюрка 42'},tel:'012 465 08 12'},
-  {id:'b2',short:'Nizami',az:'Bellinaya Nizami',ru:'Bellinaya Низами',addr:{az:'28 May küç. 7',ru:'ул. 28 Мая 7'},tel:'012 465 08 13'},
-  {id:'b3',short:'Xətai',az:'Bellinaya Xətai',ru:'Bellinaya Хатаи',addr:{az:'Xocalı pr. 55',ru:'пр. Ходжалы 55'},tel:'012 465 08 14'}
+  {id:'b1',short:'Nərimanov',az:'Bellinaya Nərimanov',ru:'Bellinaya Нариманов',addr:{az:'Atatürk pr. 42',ru:'пр. Ататюрка 42'},tel:'012 465 08 12',img:'img/b1.jpg'},
+  {id:'b2',short:'Nizami',az:'Bellinaya Nizami',ru:'Bellinaya Низами',addr:{az:'28 May küç. 7',ru:'ул. 28 Мая 7'},tel:'012 465 08 13',img:'img/b2.jpg'},
+  {id:'b3',short:'Xətai',az:'Bellinaya Xətai',ru:'Bellinaya Хатаи',addr:{az:'Xocalı pr. 55',ru:'пр. Ходжалы 55'},tel:'012 465 08 14',img:'img/b3.jpg'}
 ];
 
 const PRODS = [
-  {id:'p1',az:'Keratin şampun 400 ml',ru:'Кератиновый шампунь 400 мл',p:32,q:14,min:5,sold:19},
-  {id:'p2',az:'Rəng qoruyucu maska 250 ml',ru:'Маска для окрашенных волос 250 мл',p:28,q:6,min:5,sold:12},
-  {id:'p3',az:'Arqan yağı serum 50 ml',ru:'Сыворотка с аргановым маслом 50 мл',p:24,q:3,min:5,sold:15},
-  {id:'p4',az:'Kirpik gücləndirici serum',ru:'Сыворотка для ресниц',p:38,q:9,min:4,sold:8},
-  {id:'p5',az:'Dırnaq üstü yağ',ru:'Масло для кутикулы',p:12,q:21,min:6,sold:24},
-  {id:'p6',az:'C-vitamin serum 30 ml',ru:'Сыворотка с витамином C 30 мл',p:45,q:2,min:4,sold:11},
-  {id:'p7',az:'Günəş filtri SPF 50',ru:'Солнцезащитный крем SPF 50',p:26,q:11,min:5,sold:9},
-  {id:'p8',az:'Üz təmizləyici gel',ru:'Гель для умывания',p:22,q:17,min:6,sold:13},
-  {id:'p9',az:'Saç spreyi',ru:'Спрей для волос',p:18,q:1,min:5,sold:7},
-  {id:'p10',az:'Qaş boyası',ru:'Краска для брови',p:14,q:8,min:4,sold:6}
+  {id:'p1',az:'Keratin şampun 400 ml',ru:'Кератиновый шампунь 400 мл',p:32,q:14,min:5,sold:19,img:'img/p1.jpg'},
+  {id:'p2',az:'Rəng qoruyucu maska 250 ml',ru:'Маска для окрашенных волос 250 мл',p:28,q:6,min:5,sold:12,img:'img/p2.jpg'},
+  {id:'p3',az:'Arqan yağı serum 50 ml',ru:'Сыворотка с аргановым маслом 50 мл',p:24,q:3,min:5,sold:15,img:'img/p3.jpg'},
+  {id:'p4',az:'Kirpik gücləndirici serum',ru:'Сыворотка для ресниц',p:38,q:9,min:4,sold:8,img:'img/p4.jpg'},
+  {id:'p5',az:'Dırnaq üstü yağ',ru:'Масло для кутикулы',p:12,q:21,min:6,sold:24,img:'img/p5.jpg'},
+  {id:'p6',az:'C-vitamin serum 30 ml',ru:'Сыворотка с витамином C 30 мл',p:45,q:2,min:4,sold:11,img:'img/p6.jpg'},
+  {id:'p7',az:'Günəş filtri SPF 50',ru:'Солнцезащитный крем SPF 50',p:26,q:11,min:5,sold:9,img:'img/p7.jpg'},
+  {id:'p8',az:'Üz təmizləyici gel',ru:'Гель для умывания',p:22,q:17,min:6,sold:13,img:'img/p8.jpg'},
+  {id:'p9',az:'Saç spreyi',ru:'Спрей для волос',p:18,q:1,min:5,sold:7,img:'img/p9.jpg'},
+  {id:'p10',az:'Qaş boyası',ru:'Краска для брови',p:14,q:8,min:4,sold:6,img:'img/p10.jpg'}
 ];
 
 const CLIENTS = [

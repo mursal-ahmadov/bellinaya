@@ -19,7 +19,7 @@ function vDrawer() {
       <span style="flex:1;font-size:13px">${v}</span>
     </div>`;
   return `
-  <div style="position:fixed;top:58px;right:0;bottom:0;width:min(392px,100vw);background:#FBFAF8;border-left:1px solid #DAD5C9;box-shadow:-22px 0 50px rgba(23,20,31,.13);z-index:200;display:flex;flex-direction:column;animation:bl-slide .22s ease-out">
+  <div style="position:fixed;top:58px;right:0;bottom:0;width:min(392px,100vw);background:#FBFAF8;border-left:1px solid #DAD5C9;box-shadow:-22px 0 50px rgba(23,20,31,.13);z-index:200;display:flex;flex-direction:column;${animIf('drawer:' + a.id, 'animation:bl-slide .22s ease-out')}">
     <div style="display:flex;align-items:center;gap:10px;padding:16px 20px 13px;border-bottom:1px solid #E4E0D6">
       <span style="${F_SERIF};font-size:20px">${t.dwT}</span>
       <span style="${F_MONO};font-size:9px;letter-spacing:.1em;padding:4px 9px;border-radius:6px;background:${c.bg};color:${stColor(a.st)}">${stLabel(a.st)}</span>
@@ -70,8 +70,8 @@ function vCo() {
     }).join('');
     const methL = S.co.meth === 'cash' ? t.coCash : S.co.meth === 'card' ? t.coCard : t.coSplit;
     return `
-    <div style="position:fixed;inset:0;background:rgba(23,20,31,.42);z-index:300;display:grid;place-items:center;padding:min(40px,4vw);animation:bl-in .16s">
-      <div style="width:100%;max-width:700px;background:#F5F3ED;border-radius:20px;overflow:hidden;box-shadow:0 40px 90px rgba(0,0,0,.35);animation:bl-up .24s ease-out">
+    <div style="position:fixed;inset:0;background:rgba(23,20,31,.42);z-index:300;display:grid;place-items:center;padding:min(40px,4vw);${animIf('co:' + S.co.id, 'animation:bl-in .16s')}">
+      <div style="width:100%;max-width:700px;background:#F5F3ED;border-radius:20px;overflow:hidden;box-shadow:0 40px 90px rgba(0,0,0,.35);${animIf('coC:' + S.co.id, 'animation:bl-up .24s ease-out')}">
         <div style="display:flex;align-items:center;gap:10px;padding:17px 22px;background:#FBFAF8;border-bottom:1px solid #E4E0D6">
           <span style="${F_SERIF};font-size:21px">${t.coT}</span>
           <span style="font-size:12.5px;color:#8D8677">— ${esc(cl.n)}</span>
@@ -121,8 +121,8 @@ function vCo() {
   const meths = [['cash', t.coCash], ['card', t.coCard], ['split', t.coSplit]].map(([id, label]) => `
     <button data-c="${hnd(() => { S.co = { ...S.co, meth: id }; commit(); })}" style="flex:1;padding:11px 0;border-radius:10px;border:1px solid ${S.co.meth === id ? '#3B2E5A' : '#DED9CD'};background:${S.co.meth === id ? '#EDE9F3' : '#FBFAF8'};color:#17141F;font-size:12.5px;font-weight:${S.co.meth === id ? 700 : 500}">${label}</button>`).join('');
   return `
-  <div style="position:fixed;inset:0;background:rgba(23,20,31,.42);z-index:300;display:grid;place-items:center;padding:min(40px,4vw);animation:bl-in .16s">
-    <div style="width:100%;max-width:700px;max-height:92vh;overflow:auto;background:#F5F3ED;border-radius:20px;box-shadow:0 40px 90px rgba(0,0,0,.35);animation:bl-up .24s ease-out">
+  <div style="position:fixed;inset:0;background:rgba(23,20,31,.42);z-index:300;display:grid;place-items:center;padding:min(40px,4vw);${animIf('co:' + S.co.id, 'animation:bl-in .16s')}">
+    <div style="width:100%;max-width:700px;max-height:92vh;overflow:auto;background:#F5F3ED;border-radius:20px;box-shadow:0 40px 90px rgba(0,0,0,.35);${animIf('coC:' + S.co.id, 'animation:bl-up .24s ease-out')}">
       <div style="display:flex;align-items:center;gap:10px;padding:17px 22px;background:#FBFAF8;border-bottom:1px solid #E4E0D6">
         <span style="${F_SERIF};font-size:21px">${t.coT}</span>
         <span style="font-size:12.5px;color:#8D8677">— ${esc(cl.n)}</span>
@@ -181,8 +181,8 @@ function vQc() {
   const can = !!(q.s && q.name.trim() && validTime(q.t));
   const timeOk = validTime(q.t);
   return `
-  <div style="position:fixed;inset:0;background:rgba(23,20,31,.42);z-index:300;display:grid;place-items:center;padding:min(40px,4vw);animation:bl-in .16s">
-    <div style="width:100%;max-width:470px;max-height:92vh;overflow:auto;background:#F5F3ED;border-radius:20px;box-shadow:0 40px 90px rgba(0,0,0,.35);animation:bl-up .24s ease-out">
+  <div style="position:fixed;inset:0;background:rgba(23,20,31,.42);z-index:300;display:grid;place-items:center;padding:min(40px,4vw);${animIf('qc', 'animation:bl-in .16s')}">
+    <div style="width:100%;max-width:470px;max-height:92vh;overflow:auto;background:#F5F3ED;border-radius:20px;box-shadow:0 40px 90px rgba(0,0,0,.35);${animIf('qcC', 'animation:bl-up .24s ease-out')}">
       <div style="display:flex;align-items:center;gap:10px;padding:17px 22px;background:#FBFAF8;border-bottom:1px solid #E4E0D6">
         <span style="${F_SERIF};font-size:21px">${t.qcT}</span>
         <span style="font-size:12px;color:#8D8677">${fmtDate(q.d)}</span>
@@ -192,11 +192,11 @@ function vQc() {
       <div style="padding:18px 22px 8px;display:flex;gap:9px">
         <div style="flex:1">
           <div style="${F_MONO};font-size:9px;letter-spacing:.12em;color:#8D8677;text-transform:uppercase;margin-bottom:5px">${t.qcName}</div>
-          <input data-f="qcname" value="${esc(q.name)}" data-in="${hnd((e) => { S.quick = { ...S.quick, name: e.target.value }; commit(); })}" style="width:100%;padding:9px 11px;border-radius:10px;border:1px solid #DED9CD;background:#FBFAF8;font-size:13px" />
+          <input data-f="qcname" value="${esc(q.name)}" data-in="${hnd((e) => { const was = !!(S.quick.name || '').trim(); S.quick.name = e.target.value; if (was !== !!e.target.value.trim()) commit(); else stash(); })}" style="width:100%;padding:9px 11px;border-radius:10px;border:1px solid #DED9CD;background:#FBFAF8;font-size:13px" />
         </div>
         <div style="width:132px">
           <div style="${F_MONO};font-size:9px;letter-spacing:.12em;color:#8D8677;text-transform:uppercase;margin-bottom:5px">${t.qcPhone}</div>
-          <input data-f="qcphone" value="${esc(q.phone)}" inputmode="tel" data-in="${hnd((e) => { S.quick = { ...S.quick, phone: e.target.value }; commit(); })}" placeholder="050 000 00 00" style="width:100%;padding:9px 11px;border-radius:10px;border:1px solid #DED9CD;background:#FBFAF8;${F_MONO};font-size:12px" />
+          <input data-f="qcphone" value="${esc(q.phone)}" inputmode="tel" data-in="${hnd((e) => { S.quick.phone = e.target.value; stash(); })}" placeholder="050 000 00 00" style="width:100%;padding:9px 11px;border-radius:10px;border:1px solid #DED9CD;background:#FBFAF8;${F_MONO};font-size:12px" />
         </div>
       </div>
       <div style="padding:10px 22px 8px;display:flex;gap:9px">
@@ -206,7 +206,7 @@ function vQc() {
         </div>
         <div style="width:132px">
           <div style="${F_MONO};font-size:9px;letter-spacing:.12em;color:#8D8677;text-transform:uppercase;margin-bottom:5px">${t.fTime}</div>
-          <input data-f="qctime" value="${esc(q.t)}" data-in="${hnd((e) => { S.quick = { ...S.quick, t: e.target.value }; commit(); })}" style="width:100%;padding:9px 11px;border-radius:10px;border:1px solid ${timeOk ? '#DED9CD' : '#C0392B'};background:#FBFAF8;${F_MONO};font-size:13px" />
+          <input data-f="qctime" value="${esc(q.t)}" data-in="${hnd((e) => { const was = validTime(S.quick.t); S.quick.t = e.target.value; if (was !== validTime(e.target.value)) commit(); else stash(); })}" style="width:100%;padding:9px 11px;border-radius:10px;border:1px solid ${timeOk ? '#DED9CD' : '#C0392B'};background:#FBFAF8;${F_MONO};font-size:13px" />
         </div>
       </div>
       <div style="padding:12px 22px 4px;${F_MONO};font-size:9px;letter-spacing:.12em;color:#8D8677;text-transform:uppercase">${t.qcPick}</div>
@@ -236,7 +236,7 @@ function vNotif() {
     </button>`).join('')
     : '<div style="padding:22px 16px;font-size:12px;color:#9A9284;text-align:center">' + t.noNotif + '</div>';
   return `
-  <div style="position:fixed;top:62px;right:14px;width:330px;max-width:calc(100vw - 28px);max-height:420px;z-index:260;background:#FBFAF8;border:1px solid #DAD5C9;border-radius:15px;box-shadow:0 26px 60px rgba(23,20,31,.24);display:flex;flex-direction:column;overflow:hidden;animation:bl-up .18s ease-out">
+  <div style="position:fixed;top:62px;right:14px;width:330px;max-width:calc(100vw - 28px);max-height:420px;z-index:260;background:#FBFAF8;border:1px solid #DAD5C9;border-radius:15px;box-shadow:0 26px 60px rgba(23,20,31,.24);display:flex;flex-direction:column;overflow:hidden;${animIf('notif', 'animation:bl-up .18s ease-out')}">
     <div style="display:flex;align-items:center;gap:10px;padding:13px 15px;border-bottom:1px solid #E4E0D6">
       <span style="${LBL}">${t.notif}</span>
       <span style="flex:1"></span>
@@ -266,8 +266,8 @@ function vZr() {
       <span style="${F_MONO};font-size:12px;color:#3B2E5A;min-width:56px;text-align:right">${money(p.sal)} ₼</span>
     </div>`).join('');
   return `
-  <div style="position:fixed;inset:0;background:rgba(23,20,31,.42);z-index:320;display:grid;place-items:center;padding:min(40px,4vw);animation:bl-in .16s">
-    <div style="width:100%;max-width:660px;max-height:92vh;overflow:auto;background:#F5F3ED;border-radius:20px;box-shadow:0 40px 90px rgba(0,0,0,.35);animation:bl-up .24s ease-out">
+  <div style="position:fixed;inset:0;background:rgba(23,20,31,.42);z-index:320;display:grid;place-items:center;padding:min(40px,4vw);${animIf('zr', 'animation:bl-in .16s')}">
+    <div style="width:100%;max-width:660px;max-height:92vh;overflow:auto;background:#F5F3ED;border-radius:20px;box-shadow:0 40px 90px rgba(0,0,0,.35);${animIf('zrC', 'animation:bl-up .24s ease-out')}">
       <div style="display:flex;align-items:center;gap:10px;padding:17px 22px;background:#FBFAF8;border-bottom:1px solid #E4E0D6">
         <span style="${F_SERIF};font-size:21px">${t.zT}</span>
         <span style="flex:1"></span>
@@ -307,7 +307,7 @@ function vToast() {
   if (!S.toast) return '';
   const pos = S.view === 'panel' && S.auth.staff ? 'left:206px' : 'left:50%;transform:translateX(-50%)';
   return `
-  <div style="position:fixed;${pos};bottom:22px;z-index:400;display:flex;align-items:center;gap:10px;padding:13px 18px;border-radius:12px;background:#17141F;color:#F2F0EA;box-shadow:0 18px 40px rgba(0,0,0,.3);animation:bl-up .22s ease-out;max-width:min(420px,90vw)">
+  <div id="bl-toast" style="position:fixed;${pos};bottom:22px;z-index:400;display:flex;align-items:center;gap:10px;padding:13px 18px;border-radius:12px;background:#17141F;color:#F2F0EA;box-shadow:0 18px 40px rgba(0,0,0,.3);${animIf('toast:' + S.toast, 'animation:bl-up .22s ease-out')};max-width:min(420px,90vw)">
     <span style="width:7px;height:7px;border-radius:50%;background:#5FA88C;flex-shrink:0"></span>
     <span style="font-size:12.5px;font-weight:500">${esc(S.toast)}</span>
   </div>`;
@@ -335,12 +335,14 @@ function App() {
 
 function render() {
   REG = [];
+  ANIM_NOW = new Set();
   const root = document.getElementById('app');
   const ae = document.activeElement;
   const fkey = ae && ae.dataset ? ae.dataset.f : null;
   let selS = null, selE = null;
   if (fkey && ae.setSelectionRange) { try { selS = ae.selectionStart; selE = ae.selectionEnd; } catch (e) {} }
   root.innerHTML = App();
+  ANIM_PREV = ANIM_NOW;
   if (fkey) {
     const el = root.querySelector('[data-f="' + fkey + '"]');
     if (el) {

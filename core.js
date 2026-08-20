@@ -26,6 +26,11 @@ document.addEventListener('pointerdown', e => {
   if (el && REG[+el.dataset.pd]) REG[+el.dataset.pd](e, el);
 });
 
+/* Animation replay guard: an animated block replays its entry animation only
+   when it first appears, not on every re-render (typing would flicker otherwise). */
+let ANIM_PREV = new Set(), ANIM_NOW = new Set();
+function animIf(key, css) { ANIM_NOW.add(key); return ANIM_PREV.has(key) ? '' : css; }
+
 function esc(s) {
   return String(s == null ? '' : s)
     .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
@@ -121,6 +126,11 @@ function commit() {
   if (saveT) clearTimeout(saveT);
   saveT = setTimeout(save, 260);
 }
+/* Persist without re-rendering — used by text inputs while the user is typing. */
+function stash() {
+  if (saveT) clearTimeout(saveT);
+  saveT = setTimeout(save, 260);
+}
 function resetDemo() {
   try { localStorage.removeItem(KEY); } catch (e) {}
   S = defaults();
@@ -152,7 +162,11 @@ let toastT = null;
 function toast(k) {
   S.toast = T()[k] || k;
   if (toastT) clearTimeout(toastT);
-  toastT = setTimeout(() => { S.toast = null; render(); }, 2600);
+  toastT = setTimeout(() => {
+    S.toast = null;
+    const el = document.getElementById('bl-toast');
+    if (el) el.remove();
+  }, 2600);
 }
 function note(kind, txt, goTo) {
   S.notif = [{ id: Date.now() + Math.random(), kind, txt, t: s2m(nowMin()), go: goTo || null, read: false }, ...S.notif].slice(0, 24);
@@ -186,7 +200,7 @@ function createAppt() {
   S.appts = [...S.appts, { id, b: S.b, m: q.m, s: q.s, cl: cid, t: normTime(q.t), d: q.d, st: 'conf', on: false, extra: [], pr: null }];
   S.quick = null; S.cSel = cid; S.fresh = [...S.fresh, id];
   toast('tCreate'); commit();
-  setTimeout(() => { S.fresh = S.fresh.filter(x => x !== id); render(); }, 2600);
+  setTimeout(() => { S.fresh = S.fresh.filter(x => x !== id); }, 2600);
 }
 function validTime(t) { return /^\d{1,2}:\d{2}$/.test(t || '') && m2s(normTime(t)) >= 540 && m2s(normTime(t)) <= 1230; }
 function normTime(t) { const [h, m] = t.split(':'); return String(+h).padStart(2, '0') + ':' + m; }
@@ -336,7 +350,7 @@ function phConfirm() {
   S.ph = { ...S.ph, sc: 'ok', done: { id, m: mid } };
   note('book', L(svc(p.s)) + ' · ' + p.t, 'jour');
   toast('tNew'); commit();
-  setTimeout(() => { S.fresh = S.fresh.filter(x => x !== id); render(); }, 3200);
+  setTimeout(() => { S.fresh = S.fresh.filter(x => x !== id); }, 3200);
 }
 function phCancel(id) {
   const a = S.appts.find(x => x.id === id);
@@ -349,8 +363,8 @@ function phResc(id, t) {
   S.ph = { ...S.ph, resc: null };
   toast('tMove'); commit();
 }
-function setMeName(v) { const me = S.auth.client; if (!me || !v.trim()) return; S.cls = S.cls.map(c => c.id === me ? { ...c, n: v } : c); commit(); }
-function setMePhone(v) { const me = S.auth.client; if (!me) return; S.cls = S.cls.map(c => c.id === me ? { ...c, t: v } : c); commit(); }
+function setMeName(v) { const me = S.auth.client; if (!me || !v.trim()) return; S.cls = S.cls.map(c => c.id === me ? { ...c, n: v } : c); stash(); }
+function setMePhone(v) { const me = S.auth.client; if (!me) return; S.cls = S.cls.map(c => c.id === me ? { ...c, t: v } : c); stash(); }
 
 function cartAdd(id) {
   const c = [...S.ph.cart]; const i = c.findIndex(x => x.id === id);
