@@ -1,0 +1,245 @@
+/* Bellinaya — demo data + i18n dictionaries. All demo data is fictional. */
+'use strict';
+
+const CATS = [
+  {id:'hair',az:'Saç',ru:'Волосы',bg:'#E7E3F0',fg:'#3B2E5A'},
+  {id:'nails',az:'Dırnaq',ru:'Ногти',bg:'#F7E8DD',fg:'#A8501F'},
+  {id:'lash',az:'Kirpik & qaş',ru:'Ресницы и брови',bg:'#DFEBE6',fg:'#2F6B5E'},
+  {id:'cosmo',az:'Kosmetologiya',ru:'Косметология',bg:'#F4E3EA',fg:'#8A4A6B'},
+  {id:'makeup',az:'Makiyaj',ru:'Макияж',bg:'#E4E7F3',fg:'#46538F'},
+  {id:'epil',az:'Epilyasiya',ru:'Эпиляция',bg:'#F0ECDB',fg:'#6F6127'}
+];
+
+const SVCS = [
+  {id:'h1',c:'hair',az:'Saç kəsimi (qadın)',ru:'Женская стрижка',p:35,d:45},
+  {id:'h2',c:'hair',az:'Saç kəsimi (kişi)',ru:'Мужская стрижка',p:20,d:30},
+  {id:'h3',c:'hair',az:'Fen — yığım',ru:'Укладка',p:25,d:30},
+  {id:'h4',c:'hair',az:'Boyama — kök',ru:'Окрашивание корней',p:60,d:60},
+  {id:'h5',c:'hair',az:'Tam boyama',ru:'Полное окрашивание',p:120,d:120},
+  {id:'h6',c:'hair',az:'Balayaj',ru:'Балаяж',p:180,d:150},
+  {id:'h7',c:'hair',az:'Keratin düzləşdirmə',ru:'Кератиновое выпрямление',p:150,d:120},
+  {id:'n1',c:'nails',az:'Manikür',ru:'Маникюр',p:25,d:45},
+  {id:'n2',c:'nails',az:'Manikür + gel-lak',ru:'Маникюр + гель-лак',p:45,d:75},
+  {id:'n3',c:'nails',az:'Pedikür',ru:'Педикюр',p:35,d:60},
+  {id:'n4',c:'nails',az:'Dırnaq uzatma',ru:'Наращивание ногтей',p:70,d:90},
+  {id:'l1',c:'lash',az:'Kirpik uzatma 2D',ru:'Наращивание ресниц 2D',p:60,d:90},
+  {id:'l2',c:'lash',az:'Kirpik laminasiya',ru:'Ламинирование ресниц',p:40,d:60},
+  {id:'l3',c:'lash',az:'Qaş korreksiyası',ru:'Коррекция брови',p:15,d:20},
+  {id:'l4',c:'lash',az:'Qaş laminasiya',ru:'Ламинирование брови',p:35,d:45},
+  {id:'c1',c:'cosmo',az:'Üz təmizləmə',ru:'Чистка лица',p:70,d:60},
+  {id:'c2',c:'cosmo',az:'Hidra-peeling',ru:'Гидропилинг',p:90,d:60},
+  {id:'c3',c:'cosmo',az:'Mezoterapiya',ru:'Мезотерапия',p:130,d:45},
+  {id:'k1',c:'makeup',az:'Gündüz makiyajı',ru:'Дневной макияж',p:50,d:45},
+  {id:'k2',c:'makeup',az:'Axşam makiyajı',ru:'Вечерний макияж',p:80,d:60},
+  {id:'k3',c:'makeup',az:'Gəlin makiyajı',ru:'Свадебный макияж',p:200,d:120},
+  {id:'e1',c:'epil',az:'Lazer — qoltuq',ru:'Лазер — подмышки',p:30,d:20},
+  {id:'e2',c:'epil',az:'Lazer — ayaq',ru:'Лазер — ноги',p:90,d:45},
+  {id:'e3',c:'epil',az:'Şəkərləmə',ru:'Шугаринг',p:40,d:40}
+];
+
+const ROLES = {
+  kol:{az:'kolorist',ru:'колорист'},brb:{az:'barber',ru:'барбер'},
+  nl:{az:'dırnaq ustası',ru:'мастер маникюра'},lsh:{az:'kirpik ustası',ru:'лешмейкер'},
+  csm:{az:'kosmetoloq',ru:'косметолог'},viz:{az:'vizajist',ru:'визажист'},
+  epl:{az:'epilyasiya ustası',ru:'мастер эпиляции'}
+};
+
+const MASTERS = [
+  {id:'m1',n:'Səbinə Əliyeva',b:'b1',r:'kol',c:['hair'],pct:40,exp:9},
+  {id:'m2',n:'Nurlan Həsənov',b:'b1',r:'brb',c:['hair'],pct:35,exp:6},
+  {id:'m3',n:'Aysel Quliyeva',b:'b1',r:'nl',c:['nails'],pct:40,exp:4},
+  {id:'m4',n:'Günel Məmmədova',b:'b1',r:'lsh',c:['lash'],pct:45,exp:5},
+  {id:'m5',n:'Leyla Rəhimova',b:'b2',r:'kol',c:['hair'],pct:40,exp:11},
+  {id:'m6',n:'Elvin Kərimov',b:'b2',r:'brb',c:['hair'],pct:35,exp:3},
+  {id:'m7',n:'Fidan Süleymanova',b:'b2',r:'csm',c:['cosmo'],pct:35,exp:8},
+  {id:'m8',n:'Nərmin Abbasova',b:'b2',r:'viz',c:['makeup'],pct:45,exp:7},
+  {id:'m9',n:'Türkan Vəliyeva',b:'b3',r:'nl',c:['nails'],pct:40,exp:6},
+  {id:'m10',n:'Rəşad Əliyev',b:'b3',r:'brb',c:['hair'],pct:35,exp:5},
+  {id:'m11',n:'Ülviyyə Nəbiyeva',b:'b3',r:'epl',c:['epil'],pct:35,exp:4},
+  {id:'m12',n:'Zeynəb Hüseynova',b:'b3',r:'lsh',c:['lash'],pct:45,exp:6}
+];
+
+const BRANCHES = [
+  {id:'b1',short:'Nərimanov',az:'Bellinaya Nərimanov',ru:'Bellinaya Нариманов',addr:{az:'Atatürk pr. 42',ru:'пр. Ататюрка 42'},tel:'012 465 08 12'},
+  {id:'b2',short:'Nizami',az:'Bellinaya Nizami',ru:'Bellinaya Низами',addr:{az:'28 May küç. 7',ru:'ул. 28 Мая 7'},tel:'012 465 08 13'},
+  {id:'b3',short:'Xətai',az:'Bellinaya Xətai',ru:'Bellinaya Хатаи',addr:{az:'Xocalı pr. 55',ru:'пр. Ходжалы 55'},tel:'012 465 08 14'}
+];
+
+const PRODS = [
+  {id:'p1',az:'Keratin şampun 400 ml',ru:'Кератиновый шампунь 400 мл',p:32,q:14,min:5,sold:19},
+  {id:'p2',az:'Rəng qoruyucu maska 250 ml',ru:'Маска для окрашенных волос 250 мл',p:28,q:6,min:5,sold:12},
+  {id:'p3',az:'Arqan yağı serum 50 ml',ru:'Сыворотка с аргановым маслом 50 мл',p:24,q:3,min:5,sold:15},
+  {id:'p4',az:'Kirpik gücləndirici serum',ru:'Сыворотка для ресниц',p:38,q:9,min:4,sold:8},
+  {id:'p5',az:'Dırnaq üstü yağ',ru:'Масло для кутикулы',p:12,q:21,min:6,sold:24},
+  {id:'p6',az:'C-vitamin serum 30 ml',ru:'Сыворотка с витамином C 30 мл',p:45,q:2,min:4,sold:11},
+  {id:'p7',az:'Günəş filtri SPF 50',ru:'Солнцезащитный крем SPF 50',p:26,q:11,min:5,sold:9},
+  {id:'p8',az:'Üz təmizləyici gel',ru:'Гель для умывания',p:22,q:17,min:6,sold:13},
+  {id:'p9',az:'Saç spreyi',ru:'Спрей для волос',p:18,q:1,min:5,sold:7},
+  {id:'p10',az:'Qaş boyası',ru:'Краска для брови',p:14,q:8,min:4,sold:6}
+];
+
+const CLIENTS = [
+  {id:'c1',n:'Aynur Məmmədova',t:'050 445 12 09',v:24,s:1840,last:{az:'3 gün əvvəl',ru:'3 дня назад'},tag:'vip',note:{az:'Amonyaksız boya. Səbinəyə yazılır.',ru:'Краска без аммиака. Записывается к Сабине.'},fav:'m1'},
+  {id:'c2',n:'Ləman Əliyeva',t:'055 312 78 44',v:11,s:720,last:{az:'1 həftə əvvəl',ru:'неделю назад'},tag:'',note:{az:'',ru:''},fav:'m5'},
+  {id:'c3',n:'Ruslan Qasımov',t:'070 889 30 21',v:6,s:210,last:{az:'2 həftə əvvəl',ru:'2 недели назад'},tag:'',note:{az:'',ru:''},fav:'m2'},
+  {id:'c4',n:'Nigar Hüseynova',t:'051 220 66 15',v:31,s:2960,last:{az:'dünən',ru:'вчера'},tag:'vip',note:{az:'Kirpik kleyinə həssasdır — hipoallergen istifadə.',ru:'Чувствительность к клею — гипоаллергенный.'},fav:'m4'},
+  {id:'c5',n:'Sevinc Abbasova',t:'050 771 09 88',v:4,s:180,last:{az:'1 ay əvvəl',ru:'месяц назад'},tag:'',note:{az:'',ru:''},fav:'m1'},
+  {id:'c6',n:'Elmira Səfərova',t:'055 604 22 37',v:17,s:1120,last:{az:'5 gün əvvəl',ru:'5 дней назад'},tag:'',note:{az:'',ru:''},fav:'m3'},
+  {id:'c7',n:'Kamran Nəbiyev',t:'070 335 91 40',v:9,s:260,last:{az:'2 gün əvvəl',ru:'2 дня назад'},tag:'',note:{az:'',ru:''},fav:'m2'},
+  {id:'c8',n:'Ulduz Rəhimli',t:'051 998 14 62',v:2,s:95,last:{az:'10 gün əvvəl',ru:'10 дней назад'},tag:'new',note:{az:'',ru:''},fav:'m3'},
+  {id:'c9',n:'Zərifə Cəfərova',t:'050 118 47 03',v:13,s:890,last:{az:'4 gün əvvəl',ru:'4 дня назад'},tag:'',note:{az:'',ru:''},fav:'m9'},
+  {id:'c10',n:'Türkanə Salmanlı',t:'055 427 60 19',v:7,s:430,last:{az:'dünən',ru:'вчера'},tag:'',note:{az:'',ru:''},fav:'m4'}
+];
+
+const REVIEWS = [
+  {n:'Nigar H.',r:5,az:'Səbinə ilə balayaj — nəticə gözlədiyimdən yaxşı çıxdı. Filialda hər şey vaxtı vaxtında.',ru:'Балаяж у Сабины — результат лучше, чем я ожидала. В филиале всё точно по времени.'},
+  {n:'Kamran N.',r:5,az:'Telefondan yazıldım, gözləmə olmadı. Zəng etmək lazım gəlmədi.',ru:'Записался с телефона, ждать не пришлось. Звонить не понадобилось.'},
+  {n:'Elmira S.',r:4,az:'Manikür əla alındı, qiymətlər normaldır. Anbarda sevdiyim şampun var.',ru:'Маникюр отличный, цены нормальные. В салоне есть мой шампунь.'}
+];
+
+const I18N = {
+  az:{tag:'Gözəllik salonu · 3 filial',live:'Canlı',owner:'Salon sahibi',navHead:'İdarəetmə',branch:'Filial',
+    vPanel:'Panel',vBoth:'İkisi',vPhone:'Müştəri',
+    over:'İcmal',jour:'Jurnal',cli:'Müştərilər',svc:'Xidmətlər',stock:'Anbar',cash:'Kassa',anal:'Analitika',
+    today:'Bugün',yest:'Dünən',tom:'Sabah',min:'dəq',all:'Hamısı',search:'Axtar…',total:'Cəmi',close:'Bağla',
+    dRev:'Bugünkü gəlir',dCnt:'Yazılış',dAvg:'Orta çek',dOcc:'Ustaların doluluğu',att:'Diqqət tələb edir',
+    attU:'yazılış ödəniş gözləyir',attL:'məhsulun qalığı azdır',attP:'onlayn yazılış təsdiq gözləyir',
+    byMaster:'Bugün ustalar üzrə',nextUp:'Növbəti yazılışlar',goto:'Keç',
+    newA:'Yazılış',tip:'Boş yerə klikləyin — yazılış yaradın · Kartı sürüşdürün — saatı dəyişin',now:'indi',
+    emptyJ:'Bu filialda bu gün yazılış yoxdur',
+    stNew:'Təsdiq gözləyir',stConf:'Təsdiqlənmiş',stHere:'Gəldi',stDone:'Ödənilmiş',stUnpaid:'Ödəniş gözləyir',stCancel:'Ləğv edilmiş',
+    dwT:'Yazılış',dwPay:'Ödəniş al',dwResc:'Vaxtı dəyiş',dwCanc:'Ləğv et',dwCard:'Müştəri kartı',dwHere:'Gəldi qeyd et',
+    fMaster:'Usta',fSvc:'Xidmət',fTime:'Vaxt',fDur:'Müddət',fPrice:'Məbləğ',fClient:'Müştəri',fSrc:'Mənbə',
+    srcOn:'Onlayn — müştəri özü',srcRec:'Resepşn',fBranch:'Filial',
+    coT:'Ödəniş',coAdd:'Məhsul əlavə et',coDisc:'Endirim',coMeth:'Ödəniş üsulu',coCash:'Nağd',coCard:'Kart',coSplit:'Bölünmüş',
+    coDo:'Ödənişi tamamla',coRec:'Çek',coOk:'Ödəniş qeydə alındı',coFin:'Bitir',coQty:'Ədəd',coSum:'Məbləğ',coEmpty:'Məhsul yoxdur',
+    qcT:'Yeni yazılış',qcName:'Müştəri adı',qcPhone:'Telefon',qcMake:'Yazılışı yarat',qcPick:'Xidmət seçin',
+    cliT:'Müştəri bazası',cName:'Ad',cPhone:'Telefon',cVis:'Ziyarət',cSpend:'Ümumi xərc',cLast:'Son ziyarət',
+    cHist:'Ziyarət tarixçəsi',cFav:'Sevimli usta',cNote:'Qeyd',cBook:'Yazılış yarat',cNone:'Sol tərəfdən müştəri seçin',cVip:'VIP',cNew:'Yeni',
+    svcT:'Xidmətlər və qiymətlər',svcD:'Müddət',svcP:'Qiymət (₼)',svcM:'Usta sayı',svcNote:'Qiyməti dəyişmək üçün rəqəmin üstünə klikləyin',
+    stkT:'Kosmetika və anbar',stkP:'Məhsul',stkPr:'Qiymət',stkQ:'Qalıq',stkLow:'Az qalıq',stkIn:'Qəbul',stkSold:'Satış (ay)',stkVal:'Anbar dəyəri',
+    csT:'Kassa',csOpen:'Açılış qalığı',csCash:'Nağd daxilolma',csCard:'Kart daxilolma',csOut:'Çıxış',csBal:'Kassa qalığı',
+    csClose:'Günü bağla',csClosed:'Gün bağlandı',csTx:'Bugünkü əməliyyatlar',csNo:'Çek',csPay:'Ustaların əməkhaqqısı',
+    pMst:'Usta',pCnt:'Xidmət',pTurn:'Dövriyyə',pPct:'Faiz',pSal:'Əməkhaqqı',pTotal:'Ödənilməli',
+    anT:'Analitika',anWeek:'Son 7 gün — gəlir',anCat:'Kateqoriya üzrə',anBr:'Filiallar üzrə',anOcc:'Ustaların doluluğu',anRep:'Təkrar müştəri',
+    phHome:'Salon',phMy:'Yazılışlar',phShop:'Mağaza',phBook:'Yazılış et',phBr:'Filiallar',phSvc:'Xidmətlər və qiymətlər',phMst:'Ustalar',phRev:'Rəylər',
+    phStep:'Addım',stB:'Filial',stS:'Xidmət',stM:'Usta',stD:'Tarix və saat',stOk:'Təsdiq',
+    phAny:'Fərqi yoxdur',phNext:'Davam',phBack:'Geri',phConf:'Yazılışı təsdiqlə',phDone:'Yazılışınız qeydə alındı',
+    phDoneS:'Salonda sizi gözləyirik. Dəyişiklik üçün «Yazılışlar» bölməsinə keçin.',
+    phUp:'Yaxınlaşan',phPast:'Keçmiş',phNoFree:'Bu gün boş saat qalmadı',phFrom:'başlayır',phRate:'reyting',
+    phCart:'Səbət',phAdd:'Səbətə at',phOrder:'Sifarişi tamamla',phOrdered:'Sifariş qəbul edildi',phPickup:'Filialdan götürmə — hazır olanda SMS gələcək',
+    phMinLeft:'qalıb',phNoUp:'Yaxınlaşan yazılış yoxdur',phMyResc:'Vaxtı dəyiş',phMyCanc:'Ləğv et',phTeam:'12 usta · 3 filial',
+    phHero:'salon interyeri — foto',phPortrait:'portret',phProd:'məhsul',
+    tNew:'Yeni onlayn yazılış jurnala düşdü',tMove:'Yazılışın vaxtı dəyişdirildi',tPaid:'Ödəniş tamamlandı',tCanc:'Yazılış ləğv edildi',
+    tCreate:'Yazılış yaradıldı',tStock:'Anbara qəbul edildi',tPrice:'Qiymət yeniləndi',tOrder:'Onlayn sifariş qeydə alındı',tHere:'Müştəri gəldi',
+    devPhone:'Telefon',devDesk:'Kompüter',desk:'Müştəri telefonu',deskS:'Müştəri burada yazılır — panel dərhal görür',hide:'Gizlət',
+    login:'Giriş',loginT:'Salon paneli',loginS:'Rolu seçin və PIN daxil edin',
+    rOwner:'Salon sahibi',rRec:'Resepşn',pin:'PIN kod',enter:'Daxil ol',
+    demoPin:'Demo PIN',logout:'Çıxış',reset:'Demo məlumatı sıfırla',
+    notif:'Bildirişlər',noNotif:'Yeni bildiriş yoxdur',markAll:'Hamısını oxundu et',
+    nBook:'Onlayn yazılış',nCancel:'Müştəri ləğv etdi',nOrder:'Onlayn sifariş',nClient:'Yeni müştəri qeydiyyatı',
+    zT:'Gün bağlanışı — Z hesabatı',zSvc:'Xidmətlərdən',zProd:'Məhsul satışından',zTx:'Çek sayı',
+    zConfirm:'Təsdiqlə və günü bağla',zNote:'Bağlandıqdan sonra kassa qalığı səhər növbəsinə keçir.',
+    authT:'Hesaba giriş',authS:'Nömrənizi yazın — SMS ilə kod göndərəcəyik',
+    authCode:'SMS kodu',authCodeS:'nömrəsinə göndərilən 4 rəqəmli kodu yazın',
+    authName:'Adınız',authNameS:'Yazılışlarda göründüyünüz ad',
+    authSend:'Kod göndər',authVerify:'Təsdiqlə',authSignup:'Qeydiyyatı bitir',authChange:'Nömrəni dəyiş',
+    authWhy:'Yazılış etmək və onu idarə etmək üçün giriş lazımdır',
+    demoHint:'Demo kod',errPhone:'Nömrəni tam yazın',errCode:'Kod düz deyil',errName:'Adınızı yazın',
+    errPin:'PIN düz deyil',profile:'Hesabım',visitsN:'ziyarət',
+    tWelcome:'Panelə xoş gəldiniz',tSms:'SMS kodu göndərildi',tHi:'Hesaba daxil oldunuz',tClosed:'Gün bağlandı',
+    phMap:'xəritə',phPolicy:'Yazılışı başlamasına 2 saat qalanadək ödənişsiz dəyişə və ya ləğv edə bilərsiniz. Təsdiqdən sonra SMS göndəriləcək.',
+    free:'boş',busy:'dolu',resc:'Yeni saat seçin',save:'Yadda saxla',cancelBtn:'İmtina',
+    hintBar:'Nümayiş: sağdakı telefonda müştəri kimi yazılın — panel bunu dərhal görəcək. Panelə giriş üçün demo PIN aşağıda yazılıb.',
+    hintClose:'Aydındır'},
+  ru:{tag:'Салон красоты · 3 филиала',live:'Онлайн',owner:'Владелец салона',navHead:'Управление',branch:'Филиал',
+    vPanel:'Панель',vBoth:'Вместе',vPhone:'Клиент',
+    over:'Обзор',jour:'Журнал',cli:'Клиенты',svc:'Услуги',stock:'Склад',cash:'Касса',anal:'Аналитика',
+    today:'Сегодня',yest:'Вчера',tom:'Завтра',min:'мин',all:'Все',search:'Поиск…',total:'Итого',close:'Закрыть',
+    dRev:'Выручка за день',dCnt:'Записи',dAvg:'Средний чек',dOcc:'Загрузка мастеров',att:'Требует внимания',
+    attU:'записи ожидают оплаты',attL:'товара мало на складе',attP:'онлайн-запись ждёт подтверждения',
+    byMaster:'Сегодня по мастерам',nextUp:'Ближайшие записи',goto:'Перейти',
+    newA:'Запись',tip:'Клик по пустому месту — новая запись · Перетащите карточку — смена времени',now:'сейчас',
+    emptyJ:'В этом филиале сегодня записей нет',
+    stNew:'Ждёт подтверждения',stConf:'Подтверждена',stHere:'Пришёл',stDone:'Оплачена',stUnpaid:'Ждёт оплаты',stCancel:'Отменена',
+    dwT:'Запись',dwPay:'Принять оплату',dwResc:'Сменить время',dwCanc:'Отменить',dwCard:'Карта клиента',dwHere:'Отметить приход',
+    fMaster:'Мастер',fSvc:'Услуга',fTime:'Время',fDur:'Длительность',fPrice:'Сумма',fClient:'Клиент',fSrc:'Источник',
+    srcOn:'Онлайн — сам клиент',srcRec:'Ресепшн',fBranch:'Филиал',
+    coT:'Оплата',coAdd:'Добавить товар',coDisc:'Скидка',coMeth:'Способ оплаты',coCash:'Наличные',coCard:'Карта',coSplit:'Смешанная',
+    coDo:'Завершить оплату',coRec:'Чек',coOk:'Оплата принята',coFin:'Готово',coQty:'Кол-во',coSum:'Сумма',coEmpty:'Товаров нет',
+    qcT:'Новая запись',qcName:'Имя клиента',qcPhone:'Телефон',qcMake:'Создать запись',qcPick:'Выберите услугу',
+    cliT:'База клиентов',cName:'Имя',cPhone:'Телефон',cVis:'Визиты',cSpend:'Всего потрачено',cLast:'Последний визит',
+    cHist:'История визитов',cFav:'Любимый мастер',cNote:'Заметка',cBook:'Создать запись',cNone:'Выберите клиента слева',cVip:'VIP',cNew:'Новый',
+    svcT:'Услуги и цены',svcD:'Длительность',svcP:'Цена (₼)',svcM:'Мастеров',svcNote:'Нажмите на цену, чтобы изменить',
+    stkT:'Косметика и склад',stkP:'Товар',stkPr:'Цена',stkQ:'Остаток',stkLow:'Мало',stkIn:'Приход',stkSold:'Продажи (мес.)',stkVal:'Стоимость склада',
+    csT:'Касса',csOpen:'Остаток на начало',csCash:'Наличными',csCard:'Картой',csOut:'Расход',csBal:'Остаток в кассе',
+    csClose:'Закрыть день',csClosed:'День закрыт',csTx:'Операции за день',csNo:'Чек',csPay:'Зарплата мастеров',
+    pMst:'Мастер',pCnt:'Услуг',pTurn:'Оборот',pPct:'Процент',pSal:'Зарплата',pTotal:'К выплате',
+    anT:'Аналитика',anWeek:'7 дней — выручка',anCat:'По категориям',anBr:'По филиалам',anOcc:'Загрузка мастеров',anRep:'Повторные клиенты',
+    phHome:'Салон',phMy:'Записи',phShop:'Магазин',phBook:'Записаться',phBr:'Филиалы',phSvc:'Услуги и цены',phMst:'Мастера',phRev:'Отзывы',
+    phStep:'Шаг',stB:'Филиал',stS:'Услуга',stM:'Мастер',stD:'Дата и время',stOk:'Подтверждение',
+    phAny:'Не важно',phNext:'Далее',phBack:'Назад',phConf:'Подтвердить запись',phDone:'Запись оформлена',
+    phDoneS:'Ждём вас в салоне. Изменить можно в разделе «Записи».',
+    phUp:'Ближайшие',phPast:'Прошедшие',phNoFree:'На сегодня свободных часов нет',phFrom:'от',phRate:'рейтинг',
+    phCart:'Корзина',phAdd:'В корзину',phOrder:'Оформить заказ',phOrdered:'Заказ принят',phPickup:'Самовывоз из филиала — пришлём SMS',
+    phMinLeft:'осталось',phNoUp:'Ближайших записей нет',phMyResc:'Сменить время',phMyCanc:'Отменить',phTeam:'12 мастеров · 3 филиала',
+    phHero:'интерьер салона — фото',phPortrait:'портрет',phProd:'товар',
+    tNew:'Новая онлайн-запись в журнале',tMove:'Время записи изменено',tPaid:'Оплата завершена',tCanc:'Запись отменена',
+    tCreate:'Запись создана',tStock:'Приход оформлен',tPrice:'Цена обновлена',tOrder:'Онлайн-заказ принят',tHere:'Клиент пришёл',
+    devPhone:'Телефон',devDesk:'Компьютер',desk:'Телефон клиента',deskS:'Клиент записывается здесь — панель видит сразу',hide:'Скрыть',
+    login:'Вход',loginT:'Панель салона',loginS:'Выберите роль и введите PIN',
+    rOwner:'Владелец салона',rRec:'Ресепшн',pin:'PIN-код',enter:'Войти',
+    demoPin:'Демо PIN',logout:'Выйти',reset:'Сбросить демо-данные',
+    notif:'Уведомления',noNotif:'Новых уведомлений нет',markAll:'Отметить все прочитанными',
+    nBook:'Онлайн-запись',nCancel:'Клиент отменил',nOrder:'Онлайн-заказ',nClient:'Новый клиент',
+    zT:'Закрытие дня — Z-отчёт',zSvc:'Услуги',zProd:'Продажа товаров',zTx:'Чеков',
+    zConfirm:'Подтвердить и закрыть день',zNote:'После закрытия остаток кассы переходит в утреннюю смену.',
+    authT:'Вход в аккаунт',authS:'Введите номер — отправим код по SMS',
+    authCode:'Код из SMS',authCodeS:'введите 4-значный код, отправленный на номер',
+    authName:'Ваше имя',authNameS:'Имя, которое видно в записях',
+    authSend:'Отправить код',authVerify:'Подтвердить',authSignup:'Завершить регистрацию',authChange:'Изменить номер',
+    authWhy:'Вход нужен, чтобы записаться и управлять записями',
+    demoHint:'Демо-код',errPhone:'Введите номер полностью',errCode:'Неверный код',errName:'Введите имя',
+    errPin:'Неверный PIN',profile:'Мой аккаунт',visitsN:'визитов',
+    tWelcome:'Добро пожаловать в панель',tSms:'SMS-код отправлен',tHi:'Вы вошли в аккаунт',tClosed:'День закрыт',
+    phMap:'карта',phPolicy:'Изменить или отменить запись можно бесплатно не позднее чем за 2 часа до начала. После подтверждения придёт SMS.',
+    free:'свободно',busy:'занято',resc:'Выберите новое время',save:'Сохранить',cancelBtn:'Отмена',
+    hintBar:'Демо: запишитесь как клиент на телефоне справа — панель увидит это мгновенно. Демо-PIN для входа в панель указан ниже.',
+    hintClose:'Понятно'}
+};
+
+const MONTHS = {az:['yanvar','fevral','mart','aprel','may','iyun','iyul','avqust','sentyabr','oktyabr','noyabr','dekabr'],
+  ru:['января','февраля','марта','апреля','мая','июня','июля','августа','сентября','октября','ноября','декабря']};
+const WD = {az:['B','B.e','Ç.a','Ç','C.a','C','Ş'],ru:['Вс','Пн','Вт','Ср','Чт','Пт','Сб']};
+
+/* Today's seeded appointments (d = day offset from today) */
+function seedAppts(){
+  return [
+    {id:'a1',b:'b1',m:'m1',s:'h4',cl:'c1',t:'09:00',d:0,st:'done'},
+    {id:'a2',b:'b1',m:'m1',s:'h6',cl:'c4',t:'10:30',d:0,st:'here'},
+    {id:'a3',b:'b1',m:'m1',s:'h1',cl:'c2',t:'14:00',d:0,st:'conf'},
+    {id:'a4',b:'b1',m:'m1',s:'h5',cl:'c5',t:'17:00',d:0,st:'conf'},
+    {id:'a5',b:'b1',m:'m2',s:'h2',cl:'c3',t:'09:30',d:0,st:'done'},
+    {id:'a6',b:'b1',m:'m2',s:'h2',cl:'c7',t:'11:00',d:0,st:'done'},
+    {id:'a7',b:'b1',m:'m2',s:'h3',cl:'c5',t:'15:00',d:0,st:'conf'},
+    {id:'a8',b:'b1',m:'m2',s:'h1',cl:'c8',t:'18:00',d:0,st:'conf'},
+    {id:'a9',b:'b1',m:'m3',s:'n2',cl:'c6',t:'10:00',d:0,st:'unpaid'},
+    {id:'a10',b:'b1',m:'m3',s:'n1',cl:'c8',t:'12:30',d:0,st:'conf',on:true},
+    {id:'a11',b:'b1',m:'m3',s:'n4',cl:'c9',t:'16:00',d:0,st:'conf'},
+    {id:'a12',b:'b1',m:'m4',s:'l1',cl:'c10',t:'09:00',d:0,st:'done'},
+    {id:'a13',b:'b1',m:'m4',s:'l4',cl:'c1',t:'11:30',d:0,st:'unpaid'},
+    {id:'a14',b:'b1',m:'m4',s:'l2',cl:'c4',t:'13:00',d:0,st:'new',on:true},
+    {id:'a15',b:'b2',m:'m5',s:'h5',cl:'c2',t:'10:00',d:0,st:'here'},
+    {id:'a16',b:'b2',m:'m5',s:'h1',cl:'c6',t:'16:00',d:0,st:'conf'},
+    {id:'a17',b:'b2',m:'m6',s:'h2',cl:'c3',t:'09:00',d:0,st:'done'},
+    {id:'a18',b:'b2',m:'m7',s:'c1',cl:'c4',t:'11:00',d:0,st:'conf'},
+    {id:'a19',b:'b2',m:'m8',s:'k2',cl:'c1',t:'15:00',d:0,st:'conf'},
+    {id:'a20',b:'b3',m:'m9',s:'n1',cl:'c9',t:'10:00',d:0,st:'done'},
+    {id:'a21',b:'b3',m:'m10',s:'h2',cl:'c7',t:'12:00',d:0,st:'conf'},
+    {id:'a22',b:'b3',m:'m11',s:'e2',cl:'c10',t:'14:00',d:0,st:'conf'},
+    {id:'a23',b:'b3',m:'m12',s:'l1',cl:'c8',t:'09:30',d:0,st:'done'},
+    {id:'a24',b:'b1',m:'m1',s:'h1',cl:'c6',t:'11:00',d:1,st:'conf'},
+    {id:'a25',b:'b1',m:'m3',s:'n2',cl:'c1',t:'13:00',d:1,st:'conf'},
+    {id:'a26',b:'b1',m:'m4',s:'l1',cl:'c4',t:'15:30',d:2,st:'conf',on:true}
+  ].map(a=>({extra:[],pr:null,on:false,...a}));
+}

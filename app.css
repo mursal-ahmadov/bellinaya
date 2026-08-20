@@ -1,0 +1,33 @@
+/* Bellinaya — base styles. Component styles live inline in render templates (app.js). */
+*,*::before,*::after{box-sizing:border-box;}
+html,body{margin:0;padding:0;background:#F2F0EA;color:#17141F;
+  font-family:'Public Sans','Inter',system-ui,-apple-system,'Segoe UI',sans-serif;
+  -webkit-font-smoothing:antialiased;height:100%;}
+body{overflow:hidden;}
+#app{height:100%;}
+a{color:#3B2E5A;text-decoration:none;}
+a:hover{color:#6F5C9E;}
+input,select,button,textarea{font:inherit;color:inherit;}
+button{cursor:pointer;-webkit-tap-highlight-color:transparent;}
+button:focus-visible,input:focus-visible,select:focus-visible{outline:2px solid #6F5C9E;outline-offset:1px;}
+input:focus,select:focus{outline:none;border-color:#3B2E5A !important;}
+::-webkit-scrollbar{width:9px;height:9px;}
+::-webkit-scrollbar-thumb{background:#CFCAC0;border-radius:9px;border:2px solid transparent;background-clip:content-box;}
+::-webkit-scrollbar-track{background:transparent;}
+.serif{font-family:'Libre Caslon Display','Playfair Display',Georgia,serif;}
+.mono{font-family:'IBM Plex Mono',ui-monospace,Consolas,monospace;}
+
+@keyframes bl-pulse{0%{box-shadow:0 0 0 0 rgba(59,46,90,.45);}70%{box-shadow:0 0 0 12px rgba(59,46,90,0);}100%{box-shadow:0 0 0 0 rgba(59,46,90,0);}}
+@keyframes bl-up{from{transform:translateY(14px);opacity:0;}to{transform:translateY(0);opacity:1;}}
+@keyframes bl-in{from{opacity:0;}to{opacity:1;}}
+@keyframes bl-slide{from{transform:translateX(30px);opacity:0;}to{transform:translateX(0);opacity:1;}}
+@keyframes bl-blink{0%,100%{opacity:1;}50%{opacity:.25;}}
+
+/* initial loading splash (replaced by app render) */
+.bl-splash{height:100vh;display:grid;place-items:center;background:#F2F0EA;}
+.bl-splash span{font-family:'Libre Caslon Display','Playfair Display',Georgia,serif;
+  font-size:24px;letter-spacing:.2em;color:#3B2E5A;animation:bl-blink 1.6s infinite;}
+
+@media (max-width:760px){
+  .hide-narrow{display:none !important;}
+}

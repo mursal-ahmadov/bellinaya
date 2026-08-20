@@ -8,73 +8,70 @@
 
 ## Bu nədir
 
-Gözəllik salonları, bərbərxanalar və dırnaq studiyaları üçün onlayn yazılış və idarəetmə
-sistemi. Nümayişdə iki tərəf var və onlar **canlı bağlıdır**:
+Gözəllik salonları üçün onlayn yazılış və idarəetmə sistemi. Nümayişdə iki tərəf var
+və onlar **canlı bağlıdır**:
 
-- **Müştəri səhifəsi** — telefondan yazılış, yazılışa baxış, vaxt dəyişmə, ləğv, kosmetika sifarişi.
-- **Salon paneli** — jurnal, müştəri bazası, xidmətlər, anbar, kassa, əməkhaqqı, marketinq, analitika.
+- **Müştəri tərəfi** — telefon görünüşündə: yazılış (5 addım), SMS ilə giriş,
+  yazılışa baxış, vaxt dəyişmə, ləğv, kosmetika mağazası və səbət.
+- **Salon paneli** — icmal, jurnal (sürüklə-burax təqvim), müştəri bazası,
+  xidmətlər və qiymətlər, anbar, kassa (ödəniş + çek + gün bağlanışı Z-hesabatı),
+  əməkhaqqı, analitika.
 
-Müştəri tərəfdə edilən hər əməliyyat həmin an salon panelində görünür.
+Müştəri tərəfdə edilən hər əməliyyat həmin an salon panelində görünür:
+jurnalda yeni kart işıqlanır, bildiriş zəngi yanır.
 
 ---
 
-## Nümayiş ssenarisi — beş dəqiqə
+## Nümayiş ssenarisi
 
-Yuxarıdakı zolaqdan **Salon paneli / Müştəri səhifəsi / Yanaşı nümayiş** arasında keçid edin.
-Ən təsirli variant «Yanaşı nümayiş»dir: solda telefon, sağda panel.
+Yuxarıdakı zolaqdan **Panel / İkisi / Müştəri** görünüşləri arasında keçid edin.
+Ən təsirli variant «İkisi»dir: solda panel, sağda müştəri telefonu.
 
-1. **Müştəri kimi yazılın.** «Müştəri səhifəsi» → filial, xidmət, usta və vaxt seçin →
-   şəxsi məlumat razılığını təsdiqləyin → yazılış tamamlanır.
-   *Razılıq qutusu işarələnməsə, yazılış getmir — bu, Azərbaycan qanunvericiliyinin tələbidir.*
+1. **Panelə daxil olun.** Rol seçin — Salon sahibi (PIN `2024`) və ya Resepşn (PIN `1010`).
+2. **Müştəri kimi yazılın.** Sağdakı telefonda «Yazılış et» → nömrə `051 220 66 15` →
+   SMS kodu `5417` → filial, xidmət, usta, vaxt seçin → təsdiqləyin.
+3. **Panelə baxın.** Jurnalda yeni ONLINE yazılış pulsasiya ilə görünür,
+   zəngdə bildiriş yanır, «Jurnal» menyusunda sayğac artır.
+4. **Ödəniş alın.** Yazılış kartına klikləyin → «Təsdiqlə» → «Gəldi qeyd et» →
+   «Ödəniş al» → kosmetika məhsulu əlavə edin → endirim → ödəniş üsulu → çek.
+5. **Nəticəni yoxlayın.** Ödənişdən sonra Anbar (qalıq azalıb), Kassa (əməliyyat),
+   Əməkhaqqı (ustanın faizi) və Analitika birdən yenilənir.
+6. **Jurnalda işləyin.** Boş yerə klik — yeni yazılış; kartı sürüşdürün — vaxt dəyişir;
+   kartı başqa sütuna atın — usta dəyişir.
+7. **Günü bağlayın.** Kassa → «Günü bağla» → Z-hesabat və ustaların əməkhaqqısı.
 
-2. **Panelə keçin.** Sağ aşağıda bildiriş çıxır, jurnalda yeni yazılış işıqlanır.
-   Onlayn gələn yazılışların yanında kiçik nöqtə olur — salonun özü yaratdığından fərqlənir.
-
-3. **Ödəniş alın.** Yazılışa toxunun → «Gəldi» → «Ödəniş al» →
-   **kosmetika məhsulu əlavə edin** → endirim və ya bonus tətbiq edin → ödəniş üsulunu seçin.
-
-4. **Nəticəni yoxlayın.** Bir ödənişdən sonra dörd ekran birdən dəyişir:
-   *Məhsullar* (qalıq azalıb), *Kassa* (əməliyyat və gün bağlanışı),
-   *Əməkhaqqı* (ustanın faizi), *Analitika* (gəlir trendi).
-
-5. **Boş yeri doldurun.** Hər hansı yazılışı ləğv edin → «Boşluğu doldur» →
-   sistem gözləmə siyahısına təklif göndərir və bir neçə saniyəyə yer yenidən dolur.
-
-6. **Geri qaytarma kampaniyası.** *Marketinq* → 60 gündən çox gəlməyən müştərilərə
-   bir düymə ilə şəxsi təklif göndərilir. Göndərilən mesajların mətni orada görünür.
-
-Sürətli keçid üçün **Ctrl + K** — müştəri, xidmət, ekran və əməliyyat axtarışı.
+Yeni müştəri qeydiyyatı da işləyir: istənilən başqa nömrə yazın — ad soruşulacaq,
+panelin müştəri bazasına düşəcək.
 
 ---
 
 ## Nələr nəzərə alınıb
 
-- **Üç filial.** Yuxarıdakı seçicidən filial dəyişir; «Bütün filiallar» ümumi mənzərəni verir.
-- **Kosmetika satışı.** Həm xidmətlə birlikdə, həm ayrıca. Qalıq filial üzrə ayrı izlənir,
-  az qalıq xəbərdarlığı verilir.
-- **Kassa qanunvericiliyi.** Sistem ödənişi qeyd edir və hesabata yazır; rəsmi fiskal çek
-  salonun mövcud kassa aparatından verilir. Bu, *Parametrlər* ekranında açıq yazılıb.
-- **Fərdi məlumatlar.** Onlayn yazılışda açıq razılıq alınır — məqsəd və istifadə izah olunur.
-- **Dil.** Azərbaycanca əsas, rus və ingilis dillərinə keçid var.
-- **Tema.** İşıqlı və qaranlıq rejim, sistem parametrinə uyğunlaşma.
-- **Responsivlik.** Telefon, planşet və kompüterdə tam işlək. Telefonda açanda müştəri
-  səhifəsi tam ekran olur.
+- **Üç filial** — panel və müştəri tərəfində ayrıca seçilir, rəqəmlər filial üzrə hesablanır.
+- **Kosmetika satışı** — həm xidmətlə birlikdə (ödəniş pəncərəsində), həm ayrıca
+  (müştəri mağazası). Qalıq izlənir, az qalıq xəbərdarlığı verilir.
+- **Rollar** — Salon sahibi hər şeyi görür; Resepşn analitika və əməkhaqqını görmür.
+- **Dil** — Azərbaycanca əsas, rus dilinə tam keçid.
+- **Yaddaş** — bütün dəyişikliklər brauzerin yaddaşında qalır;
+  «Demo məlumatı sıfırla» ilkin vəziyyətə qaytarır.
+- **Responsivlik** — telefonda açanda müştəri görünüşü avtomatik tam ekran olur.
 
 ---
 
 ## Texniki
 
-Çərçivəsiz (vanilla) JavaScript, xarici kitabxana və CDN yoxdur. Şriftlər öz serverimizdə
-saxlanılır (Fraunces + Commissioner, azərbaycan hərfləri və ₼ işarəsi yoxlanılıb).
-Bütün məlumat brauzerin yaddaşındadır — *Parametrlər → Demonu sıfırla* ilə ilkin vəziyyətə qayıdır.
+Çərçivəsiz (vanilla) JavaScript, xarici kitabxana yoxdur. Şriftlər Google Fonts-dan
+(azərbaycan hərfləri, ₼ işarəsi və kiril üçün ehtiyat şrift yoxlanılıb).
 
 ```
-index.html
-assets/css/   tokens.css app.css screens.css client.css fonts.css
-assets/js/    core.js data.js store.js admin.js client.js app.js
-assets/fonts/ öz-serverimizdə saxlanan woff2 faylları
-assets/img/   loqo və favicon
-build.mjs     tək-fayl versiyasını yaradır (node build.mjs)
+index.html    giriş səhifəsi
+app.css       baza stillər və animasiyalar
+data.js       demo məlumat + AZ/RU tərcümə lüğətləri
+core.js       vəziyyət, əməliyyatlar, hadisə mexanizmi
+panel.js      salon paneli ekranları
+client.js     müştəri tərəfi (telefon + veb-sayt görünüşü)
+overlays.js   pəncərələr (yazılış kartı, ödəniş, Z-hesabat) və işə salma
+dizayn/       ilkin dizayn faylı (istinad üçün)
 ```
 
 Yerli işə salmaq üçün:
